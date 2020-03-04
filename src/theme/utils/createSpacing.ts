@@ -1,6 +1,6 @@
 import { SPACING } from '../values';
 
-export const createSpacing = (...arg: number[]): number | string => {
+export default (options: number) => (...arg: number[]): number | string => {
   if (!(arg.length <= 4)) {
     return 0;
   }
