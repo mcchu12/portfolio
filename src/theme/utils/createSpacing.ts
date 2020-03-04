@@ -1,4 +1,4 @@
-const SPACING = 8;
+import { SPACING } from '../values';
 
 export const createSpacing = (...arg: number[]): number | string => {
   if (!(arg.length <= 4)) {

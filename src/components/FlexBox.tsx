@@ -11,6 +11,9 @@ export const FlexBox: FC = props => {
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     padding: theme.spacing(1, 2),
-    border: '1px solid black'
+    [theme.breakpoints.up('md')]: {
+      backgroundColor: 'pink',
+      color: 'white'
+    }
   }
 }));
