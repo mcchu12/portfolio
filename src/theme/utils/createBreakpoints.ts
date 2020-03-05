@@ -1,12 +1,12 @@
-export type Breakpoint = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+type Breakpoint = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
-export type BreakpointValues = { [key in Breakpoint]: number };
+type BreakpointValues = { [key in Breakpoint]: number };
 
-export interface BreakpointsOptions {
+type BreakpointsOptions = {
   values: BreakpointValues;
   unit: string;
   step: number;
-}
+};
 
 const keys: Breakpoint[] = ['xs', 'sm', 'md', 'lg', 'xl'];
 

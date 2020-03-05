@@ -1,8 +1,15 @@
-import { COLORS } from '../values';
-
-export const palette = {
-  common: {
-    white: COLORS.white,
-    black: COLORS.black
-  }
+type Colors = {
+  [key: string]: string;
 };
+
+const createPalette = (colors: Colors) => {
+  return {
+    common: {
+      white: colors.white,
+      black: colors.black
+    },
+    background: colors.background
+  };
+};
+
+export default createPalette;

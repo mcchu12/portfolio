@@ -1,11 +1,11 @@
-import { SPACING } from '../values';
+type Spacing = (...arg: number[]) => number | string;
 
-export default (options: number) => (...arg: number[]): number | string => {
+export default (spacing: number): Spacing => (...arg) => {
   if (!(arg.length <= 4)) {
     return 0;
   }
 
-  const transform = (factor: number) => SPACING * factor;
+  const transform = (factor: number) => spacing * factor;
 
   if (arg.length === 0) return transform(1);
 

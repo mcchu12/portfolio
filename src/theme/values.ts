@@ -18,5 +18,6 @@ export const BREAKPOINTS = {
 
 export const COLORS = {
   white: '#FFFFFF',
-  black: '$000000'
+  black: '#000000',
+  background: '#F5F5F5'
 };
