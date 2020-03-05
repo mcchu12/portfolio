@@ -21,3 +21,7 @@ export const COLORS = {
   black: '#000000',
   background: '#F5F5F5'
 };
+
+export const TYPOGRAPHY = {
+  variants: {}
+};
