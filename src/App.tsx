@@ -1,13 +1,17 @@
 import React from 'react';
-
 import { ThemeProvider } from '@material-ui/styles';
+import { ConnectedRouter } from 'connected-react-router';
+
+import { history } from './store';
 import { theme } from './theme';
-import { Layout } from './components/Layout';
+import { Routes } from './Routes';
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <Layout></Layout>
+      <ConnectedRouter history={history}>
+        <Routes />
+      </ConnectedRouter>
     </ThemeProvider>
   );
 }

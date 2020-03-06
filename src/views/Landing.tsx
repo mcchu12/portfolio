@@ -1,6 +1,37 @@
 import React, { FC } from 'react';
-// import { makeStyles } from '@material-ui/styles';
+import { makeStyles } from '@material-ui/styles';
+import { Theme } from 'theme';
+import { Typography } from '../components/Typography';
 
 export const Landing: FC = () => {
-  return <div>Landing</div>;
+  const classes = useStyles();
+
+  return (
+    <article className={classes.root}>
+      <div className={classes.intro}>
+        <Typography variant="span">Michael Chu</Typography>
+        <Typography variant="span">Full stack web developer</Typography>
+        <Typography variant="span">Based in Toronto, CA</Typography>
+      </div>
+    </article>
+  );
 };
+
+const useStyles = makeStyles(
+  (theme: Theme) => ({
+    root: {
+      height: '100%',
+      padding: theme.spacing(4),
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center'
+    },
+    intro: {
+      '& span': {
+        display: 'block',
+        ...theme.typography.h6
+      }
+    }
+  }),
+  { name: 'landing' }
+);

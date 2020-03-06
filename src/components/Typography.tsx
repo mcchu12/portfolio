@@ -13,7 +13,8 @@ const variantMapping = {
   subtitle1: 'h6',
   subtitle2: 'h6',
   body1: 'p',
-  body2: 'p'
+  body2: 'p',
+  span: 'span'
 };
 
 type Variant = keyof typeof variantMapping;
@@ -30,12 +31,16 @@ export const Typography = React.forwardRef<
   const classes = useStyles();
 
   const { variant = 'body1' } = props;
-  const Component = variantMapping[variant] || 'span';
+  const Component = variantMapping[variant];
 
   return React.createElement(Component, {
-    className: clsx(classes.root, props.className, classes[variant]),
+    className: clsx(
+      classes.root,
+      props.className,
+      variant !== 'span' && classes[variant]
+    ),
     ref: ref,
-    ...props
+    children: props.children
   });
 });
 
