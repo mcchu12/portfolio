@@ -1,6 +1,7 @@
-import React, { FC } from 'react';
+import React, { PropsWithChildren } from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { Theme } from 'theme';
+import clsx from 'clsx';
 
 const variantMapping = {
   h1: 'h1',
@@ -18,15 +19,41 @@ const variantMapping = {
 type Variant = keyof typeof variantMapping;
 
 interface Props {
-  variant: Variant;
+  variant?: Variant;
+  className?: string;
 }
 
-export const Typography: FC<Props> = props => {
+export const Typography = React.forwardRef<
+  HTMLElement,
+  PropsWithChildren<Props>
+>((props, ref) => {
   const classes = useStyles();
 
   const { variant = 'body1' } = props;
+  const Component = variantMapping[variant] || 'span';
 
-  return <div>Typography</div>;
-};
+  return React.createElement(Component, {
+    className: clsx(classes.root, props.className, classes[variant]),
+    ref: ref,
+    ...props
+  });
+});
 
-const useStyles = makeStyles((theme: Theme) => ({}), { name: 'typography' });
+const useStyles = makeStyles(
+  (theme: Theme) => ({
+    root: {},
+    h1: theme.typography.h1,
+    h2: theme.typography.h2,
+    h3: theme.typography.h3,
+    h4: theme.typography.h4,
+    h5: theme.typography.h5,
+    h6: theme.typography.h6,
+    body1: theme.typography.body1,
+    body2: theme.typography.body2,
+    subtitle1: theme.typography.subtitle1,
+    subtitle2: theme.typography.subtitle2,
+    caption: theme.typography.caption,
+    overline: theme.typography.overline
+  }),
+  { name: 'typography' }
+);

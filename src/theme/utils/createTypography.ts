@@ -1,18 +1,30 @@
+import { CSSProperties } from 'react';
+
 const defaultFontFamily = '"Roboto", "Helvetica", "Arial", sans-serif';
 
-// type TypographyKeys =
-//   | 'h1'
-//   | 'h2'
-//   | 'h3'
-//   | 'h4'
-//   | 'h5'
-//   | 'h6'
-//   | 'body1'
-//   | 'body2'
-//   | 'subtitle1'
-//   | 'subtitle2'
-//   | 'caption'
-//   | 'overline';
+type VariantKeys =
+  | 'h1'
+  | 'h2'
+  | 'h3'
+  | 'h4'
+  | 'h5'
+  | 'h6'
+  | 'body1'
+  | 'body2'
+  | 'subtitle1'
+  | 'subtitle2'
+  | 'caption'
+  | 'overline';
+
+type VariantOptions = Pick<
+  CSSProperties,
+  | 'fontSize'
+  | 'fontWeight'
+  | 'lineHeight'
+  | 'textTransform'
+  | 'letterSpacing'
+  | 'color'
+>;
 
 interface Typography {
   fontFamily?: string;
@@ -22,7 +34,7 @@ interface Typography {
   fontWeightMedium?: number;
   fontWeightBold?: number;
   htmlFontSize?: number;
-  variants: {};
+  variants: Record<VariantKeys, VariantOptions>;
 }
 
 export default (typography: Typography) => {
