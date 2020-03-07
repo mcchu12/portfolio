@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { Theme } from 'theme';
 import { Typography } from '../components/Typography';
+import { Background } from '../components';
 
 export const Landing: FC = () => {
   const classes = useStyles();
@@ -13,6 +14,7 @@ export const Landing: FC = () => {
         <Typography variant="span">Full stack web developer</Typography>
         <Typography variant="span">Based in Toronto, CA</Typography>
       </div>
+      <Background />
     </article>
   );
 };
