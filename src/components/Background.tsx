@@ -1,7 +1,6 @@
 import React from 'react';
 import Particles, { IParticlesParams } from 'react-particles-js';
 import { makeStyles } from '@material-ui/styles';
-import { Theme } from 'theme';
 
 export const Background = () => {
   const classes = useStyles();
@@ -70,7 +69,7 @@ export const Background = () => {
 };
 
 const useStyles = makeStyles(
-  (theme: Theme) => ({
+  () => ({
     root: {
       position: 'fixed',
       top: 0,
@@ -79,5 +78,5 @@ const useStyles = makeStyles(
       right: 0
     }
   }),
-  { name: 'paticles' }
+  { name: 'background' }
 );

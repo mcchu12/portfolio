@@ -10,7 +10,7 @@ export const NavBar = forwardRef<HTMLElement>((_, ref) => {
     <header ref={ref} className={classes.root}>
       <div className={classes.toolbar}>
         <div>
-          <Typography variant="h4">M.</Typography>
+          <Typography variant="h5">M.</Typography>
         </div>
 
         <nav>

@@ -13,6 +13,8 @@ const keys: Breakpoint[] = ['xs', 'sm', 'md', 'lg', 'xl'];
 export default (options: BreakpointsOptions) => {
   const { values, unit, step } = options;
 
+  const getValues = (key: Breakpoint) => values[key];
+
   // Equal or greater than breakpoint value
   const up = (key: Breakpoint): string =>
     `@media (min-width:${values[key]}${unit})`;
@@ -47,6 +49,7 @@ export default (options: BreakpointsOptions) => {
   const only = (key: Breakpoint): string => between(key, key);
 
   return {
+    values: getValues,
     up,
     down,
     between,

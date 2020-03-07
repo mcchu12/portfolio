@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/styles';
 import { Theme } from 'theme';
 
 import { NavBar } from './NavBar';
+import { Background } from './Background';
 
 export const Layout: FC = ({ children }) => {
   const [paddingTop, setPaddingTop] = useState(0);
@@ -20,6 +21,7 @@ export const Layout: FC = ({ children }) => {
     <div className={classes.root}>
       <NavBar ref={navRef} />
       <main className={classes.main}>{children}</main>
+      <Background />
     </div>
   );
 };
