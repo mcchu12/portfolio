@@ -2,6 +2,7 @@ import React, { forwardRef } from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { Theme } from 'theme';
 import { Typography } from './Typography';
+import { Logo } from './Logo';
 
 export const NavBar = forwardRef<HTMLElement>((_, ref) => {
   const classes = useStyles();
@@ -9,9 +10,7 @@ export const NavBar = forwardRef<HTMLElement>((_, ref) => {
   return (
     <header ref={ref} className={classes.root}>
       <div className={classes.toolbar}>
-        <div>
-          <Typography variant="h5">M.</Typography>
-        </div>
+        <Logo />
 
         <nav>
           <Typography variant="subtitle1">About</Typography>

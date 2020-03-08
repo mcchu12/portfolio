@@ -24,7 +24,7 @@ export const COLORS = {
 };
 
 export const TYPOGRAPHY = {
-  fontFamily: '"Nunito", sans-serif;',
+  fontFamily: '"Quicksand", sans-serif;',
   variants: {
     h1: {
       fontSize: '6rem',
@@ -49,13 +49,14 @@ export const TYPOGRAPHY = {
     h5: {
       fontSize: '1.5rem',
       fontWeight: 400,
-      lineHeight: 1.334
+      lineHeight: 1.75,
+      letterSpacing: '1.25px'
     },
     h6: {
       fontSize: '1.25rem',
       fontWeight: 500,
       lineHeight: 1.6,
-      letterSpacing: 1.5
+      letterSpacing: 0.2
     },
     body1: {
       fontSize: '1rem',

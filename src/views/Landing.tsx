@@ -30,13 +30,13 @@ const useStyles = makeStyles(
     },
     container: {
       width: '100%',
-      maxWidth: theme.breakpoints.values('md'),
+      maxWidth: '80vw',
       margin: '0 auto'
     },
     intro: {
       '& span': {
         display: 'block',
-        ...theme.typography.h6
+        ...theme.typography.h5
       }
     }
   }),
