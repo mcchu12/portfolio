@@ -91,7 +91,8 @@ export const TYPOGRAPHY = {
       fontSize: '0.625rem',
       fontWeight: 400,
       textTransform: 'uppercase' as const,
-      lineHeight: 2.66
+      lineHeight: 2.66,
+      letterSpacing: '0.67px'
     }
   }
 };

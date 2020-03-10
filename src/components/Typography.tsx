@@ -14,7 +14,9 @@ const variantMapping = {
   subtitle2: 'h6',
   body1: 'p',
   body2: 'p',
-  span: 'span'
+  span: 'span',
+  caption: 'span',
+  overline: 'span'
 };
 
 type Variant = keyof typeof variantMapping;

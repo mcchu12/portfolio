@@ -1,19 +1,25 @@
 import React, { FC } from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { Theme } from 'theme';
-import { Typography } from '../components/Typography';
+import { Typography, ScrollArrow } from '../components';
 
 export const Landing: FC = () => {
   const classes = useStyles();
 
+  const renderIntro = () => (
+    <div className={classes.intro}>
+      <Typography variant="span">Michael Chu</Typography>
+      <Typography variant="span">Full stack web developer</Typography>
+      <Typography variant="span">Based in Toronto, CA</Typography>
+    </div>
+  );
+
   return (
     <article className={classes.root}>
       <div className={classes.container}>
-        <div className={classes.intro}>
-          <Typography variant="span">Michael Chu</Typography>
-          <Typography variant="span">Full stack web developer</Typography>
-          <Typography variant="span">Based in Toronto, CA</Typography>
-        </div>
+        {renderIntro()}
+
+        <ScrollArrow />
       </div>
     </article>
   );
@@ -26,7 +32,8 @@ const useStyles = makeStyles(
       padding: theme.spacing(4),
       display: 'flex',
       flexDirection: 'column',
-      justifyContent: 'center'
+      justifyContent: 'center',
+      position: 'relative'
     },
     container: {
       width: '100%',
