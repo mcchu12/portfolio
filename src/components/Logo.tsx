@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { Theme } from 'theme';
 
-export const Logo = () => {
+export const Logo: FC = () => {
   const classes = useStyles();
 
   return (

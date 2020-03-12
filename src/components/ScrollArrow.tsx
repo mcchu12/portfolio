@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { Theme } from 'theme';
 
 // import { Typography } from './Typography';
 
-export const ScrollArrow = () => {
+export const ScrollArrow: FC = () => {
   const classes = useStyles();
 
   return (
@@ -27,7 +27,7 @@ export const ScrollArrow = () => {
 };
 
 const useStyles = makeStyles((theme: Theme) => {
-  const base = 0.2;
+  const base = 0.3;
 
   return {
     root: {
@@ -37,7 +37,8 @@ const useStyles = makeStyles((theme: Theme) => {
       alignItems: 'center',
       position: 'absolute',
       bottom: theme.spacing(8),
-      right: theme.spacing(4)
+      left: '50%',
+      transform: 'translateX(-50%)'
     },
     '@keyframes move-chevron': {
       '25%': {
@@ -69,20 +70,20 @@ const useStyles = makeStyles((theme: Theme) => {
       height: `${base * 0.8}rem`,
       opacity: 0,
       transform: 'scale(0.3)',
-      animation: '$move-chevron 5s ease-out infinite',
+      animation: '$move-chevron 4s ease-out infinite',
       '&:first-child': {
-        animation: '$move-chevron 5s ease-out 1.67s infinite'
+        animation: '$move-chevron 4s ease-out 1.33s infinite'
       },
       '&:nth-child(2)': {
-        animation: '$move-chevron 5s ease-out 3.33s infinite'
+        animation: '$move-chevron 4s ease-out 2.66s infinite'
       },
       '&:before, &:after': {
         content: '""',
         position: 'absolute',
         top: 0,
         width: '50%',
-        height: '100%',
-        background: '#888888'
+        height: '80%',
+        background: '#7F7F7F'
       },
       '&:before': {
         left: 0,

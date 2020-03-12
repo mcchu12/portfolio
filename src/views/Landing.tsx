@@ -1,16 +1,31 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { Theme } from 'theme';
-import { Typography, ScrollArrow } from '../components';
+import { ScrollArrow, AnimatedText } from '../components';
 
 export const Landing: FC = () => {
   const classes = useStyles();
 
+  const [state, setState] = useState(0);
+
   const renderIntro = () => (
     <div className={classes.intro}>
-      <Typography variant="span">Michael Chu</Typography>
-      <Typography variant="span">Full stack web developer</Typography>
-      <Typography variant="span">Based in Toronto, CA</Typography>
+      <AnimatedText
+        shouldPlayed={state === 0}
+        onTweenCompleted={() => setState(1)}
+        delay={1}
+      >
+        Michael Chu
+      </AnimatedText>
+      <AnimatedText
+        shouldPlayed={state === 1}
+        onTweenCompleted={() => setState(2)}
+      >
+        Full stack web developer
+      </AnimatedText>
+      <AnimatedText shouldPlayed={state === 2}>
+        Based in Toronto, CA
+      </AnimatedText>
     </div>
   );
 
@@ -41,8 +56,7 @@ const useStyles = makeStyles(
       margin: '0 auto'
     },
     intro: {
-      '& span': {
-        display: 'block',
+      '& > div': {
         ...theme.typography.h5
       }
     }

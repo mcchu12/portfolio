@@ -17,6 +17,7 @@
     "clsx": "^1.1.0",
     "connected-react-router": "^6.7.0",
     "firebase": "^7.10.0",
+    "gsap": "^3.2.4",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "react-particles-js": "^2.7.1",

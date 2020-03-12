@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { FC } from 'react';
 import Particles, { IParticlesParams } from 'react-particles-js';
 import { makeStyles } from '@material-ui/styles';
 
-export const Background = () => {
+export const Background: FC = () => {
   const classes = useStyles();
 
   const options: IParticlesParams = {
@@ -37,7 +37,7 @@ export const Background = () => {
       },
       move: {
         random: true,
-        speed: 1,
+        speed: 3,
         direction: 'top-left',
         out_mode: 'out'
       }

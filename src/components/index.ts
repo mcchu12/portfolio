@@ -4,3 +4,4 @@ export { Typography } from './Typography';
 export { Background } from './Background';
 export { Logo } from './Logo';
 export { ScrollArrow } from './ScrollArrow';
+export { AnimatedText } from './AnimatedText';
