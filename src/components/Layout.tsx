@@ -4,6 +4,7 @@ import { Theme } from 'theme';
 
 import { NavBar } from './NavBar';
 import { Background } from './Background';
+import { LerpContainer } from './LerpContainer';
 
 export const Layout: FC = ({ children }) => {
   const [paddingTop, setPaddingTop] = useState(0);
@@ -20,8 +21,11 @@ export const Layout: FC = ({ children }) => {
   return (
     <div className={classes.root}>
       <NavBar ref={navRef} />
-      <main className={classes.main}>{children}</main>
-      <Background />
+
+      <LerpContainer>
+        <main>{children}</main>
+        <Background />
+      </LerpContainer>
     </div>
   );
 };
@@ -30,11 +34,8 @@ const useStyles = makeStyles<Theme, { paddingTop: number }>(
   theme => ({
     root: {
       paddingTop: props => props.paddingTop,
-      height: '100%',
       backgroundColor: theme.palette.background
-    },
-    main: {
-      height: '100%'
+      // position: 'relative'
     }
   }),
   { name: 'layout' }
