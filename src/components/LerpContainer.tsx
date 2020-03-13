@@ -1,4 +1,4 @@
-import React, { FC, useRef, useEffect } from 'react';
+import React, { FC, useRef, useEffect, createElement } from 'react';
 import { gsap, Power2 } from 'gsap';
 import { makeStyles } from '@material-ui/styles';
 
@@ -6,7 +6,7 @@ type Props = {
   component?: string;
 };
 
-export const LerpContainer: FC = ({ children }) => {
+export const LerpContainer: FC<Props> = ({ children, component = 'div' }) => {
   const classes = useStyles();
   const scrollableRef = useRef<HTMLDivElement>(null);
 
@@ -32,20 +32,23 @@ export const LerpContainer: FC = ({ children }) => {
       0}px`;
   };
 
-  return (
-    <div className={classes.root} ref={scrollableRef}>
-      {children}
-    </div>
+  return createElement(
+    component,
+    { className: classes.root },
+    <div ref={scrollableRef}>{children}</div>
   );
 };
 
-const useStyles = makeStyles(() => ({
-  root: {
-    position: 'fixed',
-    width: '100%',
-    height: '100%',
-    top: 0,
-    left: 0,
-    overflow: 'hidden'
-  }
-}));
+const useStyles = makeStyles(
+  () => ({
+    root: {
+      position: 'fixed',
+      width: '100%',
+      height: '100%',
+      top: 0,
+      left: 0,
+      overflow: 'hidden'
+    }
+  }),
+  { name: 'smooth-container' }
+);

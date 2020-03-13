@@ -29,9 +29,7 @@ const useStyles = makeStyles(
     root: {
       width: '50%',
       padding: theme.spacing(3),
-      margin: theme.spacing(5),
-
-      zIndex: 2
+      margin: theme.spacing(5)
     },
     media: {
       width: '100%',

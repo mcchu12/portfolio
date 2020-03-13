@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import Particles, { IParticlesParams } from 'react-particles-js';
 import { makeStyles } from '@material-ui/styles';
+import { Theme } from 'theme';
 
 export const Background: FC = () => {
   const classes = useStyles();
@@ -37,7 +38,7 @@ export const Background: FC = () => {
       },
       move: {
         random: true,
-        speed: 3,
+        speed: 5,
         direction: 'top-left',
         out_mode: 'out'
       }
@@ -69,13 +70,15 @@ export const Background: FC = () => {
 };
 
 const useStyles = makeStyles(
-  () => ({
+  (theme: Theme) => ({
     root: {
       position: 'fixed',
       top: 0,
       bottom: 0,
       left: 0,
-      right: 0
+      right: 0,
+      backgroundColor: theme.palette.background,
+      zIndex: -1
     }
   }),
   { name: 'background' }

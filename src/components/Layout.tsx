@@ -22,10 +22,9 @@ export const Layout: FC = ({ children }) => {
     <div className={classes.root}>
       <NavBar ref={navRef} />
 
-      <LerpContainer>
-        <main>{children}</main>
-        <Background />
-      </LerpContainer>
+      <LerpContainer component="main">{children}</LerpContainer>
+
+      <Background />
     </div>
   );
 };
@@ -33,9 +32,7 @@ export const Layout: FC = ({ children }) => {
 const useStyles = makeStyles<Theme, { paddingTop: number }>(
   theme => ({
     root: {
-      paddingTop: props => props.paddingTop,
-      backgroundColor: theme.palette.background
-      // position: 'relative'
+      paddingTop: props => props.paddingTop
     }
   }),
   { name: 'layout' }
