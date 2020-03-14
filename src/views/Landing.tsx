@@ -54,7 +54,7 @@ export const Landing: FC = () => {
 const useStyles = makeStyles(
   (theme: Theme) => ({
     root: {
-      padding: theme.spacing(4)
+      padding: theme.spacing(0, 4)
     },
     container: {
       width: '100%',

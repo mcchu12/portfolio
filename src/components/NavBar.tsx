@@ -1,14 +1,15 @@
-import React, { forwardRef } from 'react';
+import React, { FC } from 'react';
 import { makeStyles } from '@material-ui/styles';
+
 import { Theme } from 'theme';
 import { Typography } from './Typography';
 import { Logo } from './Logo';
 
-export const NavBar = forwardRef<HTMLElement>((_, ref) => {
+export const NavBar: FC = () => {
   const classes = useStyles();
 
   return (
-    <header ref={ref} className={classes.root}>
+    <header className={classes.root}>
       <div className={classes.toolbar}>
         <Logo />
 
@@ -18,7 +19,7 @@ export const NavBar = forwardRef<HTMLElement>((_, ref) => {
       </div>
     </header>
   );
-});
+};
 
 const useStyles = makeStyles(
   (theme: Theme) => ({

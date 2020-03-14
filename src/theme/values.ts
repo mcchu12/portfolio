@@ -4,6 +4,25 @@ export const BORDERS = {
   radius: 8
 };
 
+export const SHADOWS = {
+  default: `0 3px 3px rgba(0,0,0,0.2)`,
+  smooth4: `0 1px 1px rgba(0,0,0,0.15), 
+  0 2px 2px rgba(0,0,0,0.15), 
+  0 4px 4px rgba(0,0,0,0.15), 
+  0 8px 8px rgba(0,0,0,0.15)`,
+  smooth5: `0 1px 1px rgba(0,0,0,0.12), 
+  0 2px 2px rgba(0,0,0,0.12), 
+  0 4px 4px rgba(0,0,0,0.12), 
+  0 8px 8px rgba(0,0,0,0.12),
+  0 16px 16px rgba(0,0,0,0.12)`,
+  smooth6: `0 1px 1px rgba(0,0,0,0.11), 
+  0 2px 2px rgba(0,0,0,0.11), 
+  0 4px 4px rgba(0,0,0,0.11), 
+  0 8px 8px rgba(0,0,0,0.11), 
+  0 16px 16px rgba(0,0,0,0.11), 
+  0 32px 32px rgba(0,0,0,0.11)`
+};
+
 export const BREAKPOINTS = {
   values: {
     xs: 0,

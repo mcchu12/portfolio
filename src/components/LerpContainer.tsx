@@ -50,5 +50,5 @@ const useStyles = makeStyles(
       overflow: 'hidden'
     }
   }),
-  { name: 'smooth-container' }
+  { name: 'lerp-container' }
 );

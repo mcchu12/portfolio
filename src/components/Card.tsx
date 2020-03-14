@@ -27,19 +27,25 @@ export const Card: FC<Props> = props => {
 const useStyles = makeStyles(
   (theme: Theme) => ({
     root: {
-      width: '50%',
+      width: '100%',
       padding: theme.spacing(3),
-      margin: theme.spacing(5)
+      margin: theme.spacing(5),
+      [theme.breakpoints.up('md')]: {
+        width: '50%'
+      }
     },
     media: {
       width: '100%',
       height: '400px',
       backgroundColor: theme.palette.common.white,
-      boxShadow: `0 1px 1px rgba(0,0,0,0.15), 
-      0 2px 2px rgba(0,0,0,0.15), 
-      0 4px 4px rgba(0,0,0,0.15), 
-      0 8px 8px rgba(0,0,0,0.15);`,
-      borderRadius: theme.border.radius
+      boxShadow: theme.shadows.smooth5,
+      borderRadius: theme.border.radius,
+      transition: 'box-shadow .2s cubic-bezier(0.645, 0.045, 0.355, 1)',
+      cursor: 'pointer',
+      '&:hover': {
+        transition: 'box-shadow .5s cubic-bezier(0.645, 0.045, 0.355, 1)',
+        boxShadow: theme.shadows.smooth4
+      }
     },
     title: {
       margin: theme.spacing(3, 0)

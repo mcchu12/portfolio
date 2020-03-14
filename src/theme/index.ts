@@ -4,14 +4,22 @@ import {
   createPalette,
   createTypography
 } from './utils';
-import { BORDERS, SPACING, BREAKPOINTS, COLORS, TYPOGRAPHY } from './values';
+import {
+  BORDERS,
+  SPACING,
+  BREAKPOINTS,
+  COLORS,
+  TYPOGRAPHY,
+  SHADOWS
+} from './values';
 
 export const theme = {
   spacing: createSpacing(SPACING),
   breakpoints: createBreakpoints(BREAKPOINTS),
   palette: createPalette(COLORS),
   typography: createTypography(TYPOGRAPHY),
-  border: BORDERS
+  border: BORDERS,
+  shadows: SHADOWS
 };
 
 export default theme;
