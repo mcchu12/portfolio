@@ -1,7 +1,13 @@
 import React, { FC, useState } from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { Theme } from 'theme';
-import { ScrollArrow, AnimatedText, Card } from '../components';
+import {
+  ScrollArrow,
+  AnimatedText,
+  Card,
+  Typography,
+  Button
+} from '../components';
 
 export const Landing: FC = () => {
   const classes = useStyles();
@@ -36,9 +42,19 @@ export const Landing: FC = () => {
       <article className={classes.container}>
         <div>
           {renderIntro()}
-
-          <ScrollArrow />
+          <div className={classes.connect}>
+            <Button>
+              <Typography variant="overline">Github</Typography>
+            </Button>
+            <Button>
+              <Typography variant="overline">Linkedin</Typography>
+            </Button>
+            <Button>
+              <Typography variant="overline">Resume</Typography>
+            </Button>
+          </div>
         </div>
+        <ScrollArrow />
       </article>
 
       <article className={classes.grid}>
@@ -54,12 +70,17 @@ export const Landing: FC = () => {
 const useStyles = makeStyles(
   (theme: Theme) => ({
     root: {
-      padding: theme.spacing(0, 4)
+      margin: '0 auto',
+      padding: theme.spacing(0, 2),
+      [theme.breakpoints.up('sm')]: {
+        maxWidth: '80vw',
+        padding: theme.spacing(0, 4)
+      }
     },
     container: {
       width: '100%',
       minHeight: '100vh',
-      maxWidth: '80vw',
+
       margin: '0 auto',
       display: 'flex',
       flexDirection: 'column',
@@ -69,13 +90,20 @@ const useStyles = makeStyles(
     grid: {
       display: 'flex',
       flexDirection: 'column',
-      '& div:nth-child(even)': {
-        alignSelf: 'flex-end'
+      [theme.breakpoints.up('md')]: {
+        '& div:nth-child(even)': {
+          alignSelf: 'flex-end'
+        }
       }
     },
     intro: {
       '& > div': {
         ...theme.typography.h5
+      }
+    },
+    connect: {
+      '& > button': {
+        marginRight: theme.spacing(2)
       }
     }
   }),

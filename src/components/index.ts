@@ -7,3 +7,4 @@ export { ScrollArrow } from './ScrollArrow';
 export { AnimatedText } from './AnimatedText';
 export { Card } from './Card';
 export { LerpContainer } from './LerpContainer';
+export { Button } from './Button';

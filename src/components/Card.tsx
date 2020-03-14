@@ -28,8 +28,7 @@ const useStyles = makeStyles(
   (theme: Theme) => ({
     root: {
       width: '100%',
-      padding: theme.spacing(3),
-      margin: theme.spacing(5),
+      margin: theme.spacing(3, 0),
       [theme.breakpoints.up('md')]: {
         width: '50%'
       }
@@ -43,7 +42,7 @@ const useStyles = makeStyles(
       transition: 'box-shadow .2s cubic-bezier(0.645, 0.045, 0.355, 1)',
       cursor: 'pointer',
       '&:hover': {
-        transition: 'box-shadow .5s cubic-bezier(0.645, 0.045, 0.355, 1)',
+        transition: 'box-shadow .3s cubic-bezier(0.645, 0.045, 0.355, 1)',
         boxShadow: theme.shadows.smooth4
       }
     },

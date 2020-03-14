@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/styles';
 import { Theme } from 'theme';
 import { Typography } from './Typography';
 import { Logo } from './Logo';
+import { Button } from './Button';
 
 export const NavBar: FC = () => {
   const classes = useStyles();
@@ -14,7 +15,9 @@ export const NavBar: FC = () => {
         <Logo />
 
         <nav>
-          <Typography variant="subtitle1">About</Typography>
+          <Button>
+            <Typography variant="subtitle1">About</Typography>
+          </Button>
         </nav>
       </div>
     </header>
