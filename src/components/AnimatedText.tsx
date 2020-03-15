@@ -45,9 +45,9 @@ export const AnimatedText: FC<Props> = ({
 
   useEffect(() => {
     if (!tweenRef.current)
-      tweenRef.current = gsap.to(charsElements, {
+      tweenRef.current = gsap.from(charsElements, {
         duration: 0.01,
-        opacity: 1,
+        opacity: 0,
         delay: delay || 0.2,
         ease: Power4.easeIn,
         stagger: 0.06,
@@ -61,7 +61,7 @@ export const AnimatedText: FC<Props> = ({
     if (shouldPlayed) tweenRef.current.play();
   }, [charsElements, shouldPlayed, onTweenCompleted, delay, state]);
 
-  const splitStyles = { display: 'inline-block', opacity: 0 };
+  const splitStyles = { display: 'inline-block' };
 
   const renderChars = (word: string[]) => {
     const { text } = state;

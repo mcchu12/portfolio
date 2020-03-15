@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { PropsWithChildren } from 'react';
 import { makeStyles } from '@material-ui/styles';
 import clsx from 'clsx';
 import { Theme } from 'theme';
@@ -8,19 +8,22 @@ type Props = {
   onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 };
 
-export const Button: FC<Props> = ({
-  children,
-  variant = 'default',
-  onClick
-}) => {
+export const Button = React.forwardRef<
+  HTMLButtonElement,
+  PropsWithChildren<Props>
+>(({ children, variant = 'default', onClick }, ref) => {
   const classes = useStyles();
 
   return (
-    <button className={clsx(classes.root, classes[variant])} onClick={onClick}>
+    <button
+      ref={ref}
+      className={clsx(classes.root, classes[variant])}
+      onClick={onClick}
+    >
       {children}
     </button>
   );
-};
+});
 
 const useStyles = makeStyles(
   (theme: Theme) => ({

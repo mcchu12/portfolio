@@ -1,5 +1,6 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, useRef, useEffect } from 'react';
 import { makeStyles } from '@material-ui/styles';
+import { gsap, Power0 } from 'gsap';
 import { Theme } from 'theme';
 import {
   ScrollArrow,
@@ -9,10 +10,30 @@ import {
   Button
 } from '../components';
 
+const connections = ['github', 'linkedin', 'resume'];
+
 export const Landing: FC = () => {
   const classes = useStyles();
-
+  const tweenRef = useRef<gsap.core.Tween>();
   const [state, setState] = useState(0);
+
+  const buttonElements: HTMLButtonElement[] = [];
+
+  useEffect(() => {
+    tweenRef.current = gsap.fromTo(
+      buttonElements,
+      { opacity: 0, y: 10 },
+      {
+        duration: 0.2,
+        delay: 0.2,
+        opacity: 1,
+        y: 0,
+        ease: Power0.easeOut,
+        stagger: 0.2,
+        paused: true
+      }
+    );
+  }, [buttonElements]);
 
   const renderIntro = () => {
     return (
@@ -30,7 +51,12 @@ export const Landing: FC = () => {
         >
           Full stack web developer
         </AnimatedText>
-        <AnimatedText shouldPlayed={state === 2}>
+        <AnimatedText
+          shouldPlayed={state === 2}
+          onTweenCompleted={() => {
+            tweenRef.current?.play();
+          }}
+        >
           Based in Toronto, CA
         </AnimatedText>
       </div>
@@ -43,25 +69,28 @@ export const Landing: FC = () => {
         <div>
           {renderIntro()}
           <div className={classes.connect}>
-            <Button>
-              <Typography variant="overline">Github</Typography>
-            </Button>
-            <Button>
-              <Typography variant="overline">Linkedin</Typography>
-            </Button>
-            <Button>
-              <Typography variant="overline">Resume</Typography>
-            </Button>
+            {connections.map((connection, index) => (
+              <Button
+                key={index}
+                ref={btn => btn && (buttonElements[index] = btn)}
+              >
+                <Typography variant="overline">{connection}</Typography>
+              </Button>
+            ))}
           </div>
         </div>
         <ScrollArrow />
       </article>
 
       <article className={classes.grid}>
-        <Card title="Crumbs" subtitle="HTML / CSS / JS"></Card>
-        <Card title="Dogify" subtitle="Angular2 / Python / Flask"></Card>
-        <Card title="Leahlou" subtitle="React / Redux"></Card>
-        <Card title="Dollar" subtitle="React / Redux"></Card>
+        <Card index="01" title="Crumbs" subtitle="HTML / CSS / JS"></Card>
+        <Card
+          index="02"
+          title="Dogify"
+          subtitle="Angular2 / Python / Flask"
+        ></Card>
+        <Card index="03" title="Leahlou" subtitle="React / Redux"></Card>
+        <Card index="04" title="Dollar" subtitle="React / Redux"></Card>
       </article>
     </div>
   );
@@ -71,7 +100,7 @@ const useStyles = makeStyles(
   (theme: Theme) => ({
     root: {
       margin: '0 auto',
-      padding: theme.spacing(0, 2),
+      padding: theme.spacing(0, 3),
       [theme.breakpoints.up('sm')]: {
         maxWidth: '80vw',
         padding: theme.spacing(0, 4)
@@ -102,8 +131,9 @@ const useStyles = makeStyles(
       }
     },
     connect: {
+      marginTop: theme.spacing(1.5),
       '& > button': {
-        marginRight: theme.spacing(2)
+        marginRight: theme.spacing(3)
       }
     }
   }),

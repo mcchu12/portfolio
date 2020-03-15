@@ -68,7 +68,7 @@ export const TYPOGRAPHY = {
     h5: {
       fontSize: '1.5rem',
       fontWeight: 500,
-      lineHeight: 1.75,
+      lineHeight: 1.6,
       letterSpacing: '1.25px'
     },
     h6: {

@@ -8,6 +8,7 @@ type Props = {
   thumbnail?: string;
   title?: string;
   subtitle?: string;
+  index?: string;
 };
 
 export const Card: FC<Props> = props => {
@@ -20,6 +21,7 @@ export const Card: FC<Props> = props => {
         <Typography variant="h6">{props.title}</Typography>
         <Typography variant="overline">{props.subtitle}</Typography>
       </div>
+      <div className={classes.index}>{props.index}</div>
     </div>
   );
 };
@@ -28,7 +30,8 @@ const useStyles = makeStyles(
   (theme: Theme) => ({
     root: {
       width: '100%',
-      margin: theme.spacing(3, 0),
+      position: 'relative',
+      margin: theme.spacing(6, 0),
       [theme.breakpoints.up('md')]: {
         width: '50%'
       }
@@ -48,6 +51,21 @@ const useStyles = makeStyles(
     },
     title: {
       margin: theme.spacing(3, 0)
+    },
+    index: {
+      display: 'none',
+      [theme.breakpoints.up('md')]: {
+        display: 'block',
+        position: 'absolute',
+        top: 0,
+        right: 0,
+        transform: 'translate(40%, -50%)',
+        opacity: 0.05,
+        fontSize: '152px',
+        fontWeight: 700,
+        letterSpacing: '8px',
+        zIndex: -1
+      }
     }
   }),
   { name: 'card' }
