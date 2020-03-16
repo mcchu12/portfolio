@@ -1,10 +1,22 @@
-import React, { FC, useRef, useEffect, createElement } from 'react';
+import React, {
+  FC,
+  useRef,
+  useEffect,
+  createElement,
+  createContext
+} from 'react';
 import { gsap, Power2 } from 'gsap';
 import { makeStyles } from '@material-ui/styles';
 
 type Props = {
   component?: string;
 };
+
+type ContextProps = {
+  setSize?: () => void;
+};
+
+export const LerpContext = createContext<ContextProps>({});
 
 export const LerpContainer: FC<Props> = ({ children, component = 'div' }) => {
   const classes = useStyles();
@@ -39,7 +51,11 @@ export const LerpContainer: FC<Props> = ({ children, component = 'div' }) => {
   return createElement(
     component,
     { className: classes.root },
-    <div ref={scrollableRef}>{children}</div>
+    <div ref={scrollableRef}>
+      <LerpContext.Provider value={{ setSize }}>
+        {children}
+      </LerpContext.Provider>
+    </div>
   );
 };
 

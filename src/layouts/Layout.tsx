@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
 
-import { NavBar } from './NavBar';
-import { Background } from './Background';
+import { NavBar, Background } from '../components';
 import { LerpContainer } from './LerpContainer';
 
 export const Layout: FC = ({ children }) => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { Layout } from './components';
+import { Layout } from './layouts';
 import { Landing as LandingView } from './views';
 
 export const Routes = () => {

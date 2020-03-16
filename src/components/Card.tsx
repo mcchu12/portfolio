@@ -36,7 +36,6 @@ const useStyles = makeStyles(
   (theme: Theme) => ({
     root: {
       position: 'relative',
-      // display: 'inline-block',
       margin: theme.spacing(6, 0),
       [theme.breakpoints.up('md')]: {
         width: '50%'
