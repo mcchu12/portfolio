@@ -13,9 +13,13 @@ export const LerpContainer: FC<Props> = ({ children, component = 'div' }) => {
   useEffect(() => {
     setSize();
     window.addEventListener('scroll', onScroll);
+    window.addEventListener('resize', setSize);
 
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', setSize);
+    };
+  });
 
   const onScroll = (): void => {
     const scroll = window.pageYOffset || document.documentElement.scrollTop;

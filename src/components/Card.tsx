@@ -9,6 +9,7 @@ type Props = {
   title?: string;
   subtitle?: string;
   index?: string;
+  onImageLoaded?: () => void;
 };
 
 export const Card: FC<Props> = props => {
@@ -16,7 +17,12 @@ export const Card: FC<Props> = props => {
 
   return (
     <div className={classes.root}>
-      <div className={classes.media}></div>
+      <img
+        className={classes.media}
+        src={props.thumbnail}
+        alt={props.title}
+        onLoad={props.onImageLoaded}
+      ></img>
       <div className={classes.title}>
         <Typography variant="h6">{props.title}</Typography>
         <Typography variant="overline">{props.subtitle}</Typography>
@@ -29,21 +35,22 @@ export const Card: FC<Props> = props => {
 const useStyles = makeStyles(
   (theme: Theme) => ({
     root: {
-      width: '100%',
       position: 'relative',
+      // display: 'inline-block',
       margin: theme.spacing(6, 0),
       [theme.breakpoints.up('md')]: {
         width: '50%'
       }
     },
     media: {
-      width: '100%',
-      height: '400px',
       backgroundColor: theme.palette.common.white,
       boxShadow: theme.shadows.smooth5,
       borderRadius: theme.border.radius,
       transition: 'box-shadow .2s cubic-bezier(0.645, 0.045, 0.355, 1)',
       cursor: 'pointer',
+
+      width: '100%',
+
       '&:hover': {
         transition: 'box-shadow .3s cubic-bezier(0.645, 0.045, 0.355, 1)',
         boxShadow: theme.shadows.smooth4

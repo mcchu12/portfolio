@@ -11,11 +11,39 @@ import {
 } from '../components';
 
 const connections = ['github', 'linkedin', 'resume'];
+const projects = [
+  {
+    index: '01',
+    title: 'Crumbs',
+    subtitle: 'HTML / CSS / JS',
+    thumbnail: './images/crumbs.jpg'
+  },
+  {
+    index: '02',
+    title: 'Dogify',
+    subtitle: 'Angular2 / Python / Flask',
+    thumbnail: './images/dogify.jpg'
+  },
+  {
+    index: '03',
+    title: 'Leahlou',
+    subtitle: 'React / Redux',
+    thumbnail: './images/leahlou.jpg'
+  },
+  {
+    index: '04',
+    title: 'Dollar',
+    subtitle: 'React / Redux',
+    thumbnail: './images/crumbs2.jpg'
+  }
+];
 
 export const Landing: FC = () => {
   const classes = useStyles();
   const tweenRef = useRef<gsap.core.Tween>();
+  const counter = useRef(0);
   const [state, setState] = useState(0);
+  const [showImages, setShowImages] = useState(false);
 
   const buttonElements: HTMLButtonElement[] = [];
 
@@ -34,6 +62,12 @@ export const Landing: FC = () => {
       }
     );
   }, [buttonElements]);
+
+  const handleLoaded = () => {
+    counter.current += 1;
+    console.log('counter');
+    if (counter.current >= projects.length) setShowImages(true);
+  };
 
   const renderIntro = () => {
     return (
@@ -83,14 +117,13 @@ export const Landing: FC = () => {
       </article>
 
       <article className={classes.grid}>
-        <Card index="01" title="Crumbs" subtitle="HTML / CSS / JS"></Card>
-        <Card
-          index="02"
-          title="Dogify"
-          subtitle="Angular2 / Python / Flask"
-        ></Card>
-        <Card index="03" title="Leahlou" subtitle="React / Redux"></Card>
-        <Card index="04" title="Dollar" subtitle="React / Redux"></Card>
+        {projects.map(projects => (
+          <Card
+            key={projects.index}
+            {...projects}
+            onImageLoaded={handleLoaded}
+          />
+        ))}
       </article>
     </div>
   );
@@ -121,7 +154,7 @@ const useStyles = makeStyles(
       flexDirection: 'column',
       [theme.breakpoints.up('md')]: {
         '& div:nth-child(even)': {
-          alignSelf: 'flex-end'
+          marginLeft: 'auto'
         }
       }
     },
