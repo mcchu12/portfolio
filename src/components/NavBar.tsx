@@ -24,10 +24,10 @@ export const NavBar: FC = () => {
   );
 };
 
-const useStyles = makeStyles(
-  (theme: Theme) => ({
+const useStyles = makeStyles<Theme>(
+  theme => ({
     root: {
-      position: 'fixed',
+      position: 'absolute',
       top: 0,
       left: 0,
       right: 0,

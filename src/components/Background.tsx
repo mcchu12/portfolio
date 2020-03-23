@@ -77,8 +77,7 @@ const useStyles = makeStyles(
       bottom: 0,
       left: 0,
       right: 0,
-      backgroundColor: theme.palette.background,
-      zIndex: -1
+      zIndex: -10
     }
   }),
   { name: 'background' }

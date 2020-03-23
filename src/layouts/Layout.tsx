@@ -1,16 +1,15 @@
 import React, { FC } from 'react';
 
-import { NavBar, Background } from '../components';
-import { LerpContainer } from './LerpContainer';
+import { NavBar } from '../components';
 
 export const Layout: FC = ({ children }) => {
   return (
     <div>
       <NavBar />
 
-      <LerpContainer component="main">{children}</LerpContainer>
+      <main>{children}</main>
 
-      <Background />
+      {/* <Background /> */}
     </div>
   );
 };

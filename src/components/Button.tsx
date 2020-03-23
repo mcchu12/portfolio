@@ -37,7 +37,26 @@ const useStyles = makeStyles(
         outline: 0
       }
     },
-    default: {},
+    default: {
+      position: 'relative',
+
+      '&:before': {
+        content: '""',
+        position: 'absolute',
+        width: '100%',
+        height: '1px',
+        bottom: 0,
+        left: 0,
+        backgroundColor: theme.palette.common.black,
+        visibility: 'hidden',
+        transform: 'scale(0)',
+        transition: 'all 0.3s ease-in-out'
+      },
+      '&:hover:before': {
+        visibility: 'visible',
+        transform: 'scale(1)'
+      }
+    },
     outlined: {
       padding: theme.spacing(1, 2),
       borderColor: theme.palette.background,

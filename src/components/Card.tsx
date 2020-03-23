@@ -17,16 +17,18 @@ export const Card: FC<Props> = props => {
 
   return (
     <div className={classes.root}>
-      <img
-        className={classes.media}
-        src={props.thumbnail}
-        alt={props.title}
-        onLoad={props.onImageLoaded}
-      ></img>
-      <div className={classes.title}>
-        <Typography variant="h6">{props.title}</Typography>
-        <Typography variant="overline">{props.subtitle}</Typography>
+      <div>
+        <img
+          className={classes.thumbnail}
+          src={props.thumbnail}
+          alt={props.title}
+        />
+        <div className={classes.title}>
+          <Typography variant="h6">{props.title}</Typography>
+          <Typography variant="overline">{props.subtitle}</Typography>
+        </div>
       </div>
+
       <div className={classes.index}>{props.index}</div>
     </div>
   );
@@ -39,20 +41,21 @@ const useStyles = makeStyles(
       margin: theme.spacing(6, 0),
       [theme.breakpoints.up('md')]: {
         width: '50%'
-      }
+      },
+      zIndex: 2
     },
-    media: {
-      backgroundColor: theme.palette.common.white,
-      boxShadow: theme.shadows.smooth5,
-      borderRadius: theme.border.radius,
-      transition: 'box-shadow .2s cubic-bezier(0.645, 0.045, 0.355, 1)',
-      cursor: 'pointer',
-
+    thumbnail: {
       width: '100%',
+      display: 'block',
+      boxShadow: theme.shadows.smooth2,
+      borderRadius: theme.border.radius,
+      cursor: 'pointer',
+      transition: 'all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1)',
 
       '&:hover': {
-        transition: 'box-shadow .3s cubic-bezier(0.645, 0.045, 0.355, 1)',
-        boxShadow: theme.shadows.smooth4
+        transform: 'scale(1.05, 1.05)',
+        boxShadow: theme.shadows.dreamy,
+        transition: 'all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1)'
       }
     },
     title: {

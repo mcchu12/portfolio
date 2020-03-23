@@ -1,9 +1,8 @@
-import React, { FC, useRef, useContext } from 'react';
+import React, { FC } from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { Theme } from 'theme';
 
-import { LerpContext } from '../../layouts';
-import { Card } from '../../components';
+import { Card, Typography } from '../../components';
 
 const projects = [
   {
@@ -34,33 +33,37 @@ const projects = [
 
 export const Projects: FC = () => {
   const classes = useStyles();
-  const counter = useRef(0);
+  // const counter = useRef(0);
 
-  const context = useContext(LerpContext);
+  // const context = useContext(LerpContext);
 
-  const handleLoaded = () => {
-    const { setSize } = context;
+  // const handleLoaded = () => {
+  //   const { setSize } = context;
 
-    counter.current += 1;
-    if (counter.current >= projects.length) setSize && setSize();
-  };
+  //   counter.current += 1;
+  //   if (counter.current >= projects.length) setSize && setSize();
+  // };
 
   return (
-    <article className={classes.root}>
-      {projects.map(projects => (
-        <Card key={projects.index} {...projects} onImageLoaded={handleLoaded} />
-      ))}
+    <article>
+      <Typography variant="h4">Projects</Typography>
+      <div className={classes.grid}>
+        {projects.map(projects => (
+          <Card key={projects.index} {...projects} />
+        ))}
+      </div>
     </article>
   );
 };
 
 const useStyles = makeStyles(
   (theme: Theme) => ({
-    root: {
+    grid: {
+      marginTop: theme.spacing(12),
       display: 'flex',
       flexDirection: 'column',
       [theme.breakpoints.up('md')]: {
-        '& div:nth-child(even)': {
+        '& > div:nth-child(even)': {
           marginLeft: 'auto'
         }
       }

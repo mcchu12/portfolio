@@ -3,12 +3,7 @@ import { makeStyles } from '@material-ui/styles';
 import { gsap, Power0 } from 'gsap';
 import { Theme } from 'theme';
 
-import {
-  Button,
-  Typography,
-  AnimatedText,
-  ScrollArrow
-} from '../../components';
+import { Button, Typography, AnimatedText } from '../../components';
 
 const connections = ['github', 'linkedin', 'resume'];
 
@@ -80,8 +75,6 @@ export const Intro: FC = () => {
           ))}
         </div>
       </div>
-
-      <ScrollArrow />
     </article>
   );
 };
