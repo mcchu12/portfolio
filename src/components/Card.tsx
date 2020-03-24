@@ -1,6 +1,8 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect, useRef } from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { Theme } from 'theme';
+import { gsap, Power2 } from 'gsap';
+import { useInView } from 'react-intersection-observer';
 
 import { Typography } from './Typography';
 
@@ -14,10 +16,31 @@ type Props = {
 
 export const Card: FC<Props> = props => {
   const classes = useStyles();
+  const [ref, inView, entry] = useInView({ threshold: 0.5, triggerOnce: true });
+  const cardRef = useRef<HTMLDivElement>(null);
+  const animRef = useRef<gsap.core.Tween>();
+
+  useEffect(() => {
+    if (!cardRef.current) return;
+    const cardContents = cardRef.current.children;
+
+    if (!animRef.current)
+      animRef.current = gsap.from(cardContents, {
+        opacity: 0,
+        y: 60,
+        ease: Power2.easeOut,
+        stagger: { amount: 0.5 },
+        paused: true
+      });
+
+    if (inView && entry && entry.intersectionRatio >= 0.5) {
+      animRef.current.play();
+    }
+  }, [inView, entry]);
 
   return (
-    <div className={classes.root}>
-      <div>
+    <div ref={ref} className={classes.root}>
+      <div ref={cardRef}>
         <img
           className={classes.thumbnail}
           src={props.thumbnail}

@@ -33,16 +33,6 @@ const projects = [
 
 export const Projects: FC = () => {
   const classes = useStyles();
-  // const counter = useRef(0);
-
-  // const context = useContext(LerpContext);
-
-  // const handleLoaded = () => {
-  //   const { setSize } = context;
-
-  //   counter.current += 1;
-  //   if (counter.current >= projects.length) setSize && setSize();
-  // };
 
   return (
     <article>

@@ -3,7 +3,12 @@ import { makeStyles } from '@material-ui/styles';
 import { gsap, Power0 } from 'gsap';
 import { Theme } from 'theme';
 
-import { Button, Typography, AnimatedText } from '../../components';
+import {
+  Button,
+  Typography,
+  AnimatedText,
+  ScrollArrow
+} from '../../components';
 
 const connections = ['github', 'linkedin', 'resume'];
 
@@ -11,11 +16,14 @@ export const Intro: FC = () => {
   const classes = useStyles();
   const tweenRef = useRef<gsap.core.Tween>();
 
-  const [state, setState] = useState(0);
+  const [textAnim, setTextAnim] = useState(0);
+  const [scrollAnim, setScrollAnim] = useState(false);
 
   const buttonElements: HTMLButtonElement[] = [];
 
   useEffect(() => {
+    if (tweenRef.current) return;
+
     tweenRef.current = gsap.fromTo(
       buttonElements,
       { opacity: 0, y: 10 },
@@ -26,7 +34,10 @@ export const Intro: FC = () => {
         y: 0,
         ease: Power0.easeOut,
         stagger: 0.2,
-        paused: true
+        paused: true,
+        onComplete: () => {
+          setScrollAnim(true);
+        }
       }
     );
   }, [buttonElements]);
@@ -35,20 +46,20 @@ export const Intro: FC = () => {
     return (
       <div className={classes.greeting}>
         <AnimatedText
-          shouldPlayed={state === 0}
-          onTweenCompleted={() => setState(1)}
+          shouldPlayed={textAnim === 0}
+          onTweenCompleted={() => setTextAnim(1)}
           delay={1}
         >
           Michael Chu
         </AnimatedText>
         <AnimatedText
-          shouldPlayed={state === 1}
-          onTweenCompleted={() => setState(2)}
+          shouldPlayed={textAnim === 1}
+          onTweenCompleted={() => setTextAnim(2)}
         >
           Full stack web developer
         </AnimatedText>
         <AnimatedText
-          shouldPlayed={state === 2}
+          shouldPlayed={textAnim === 2}
           onTweenCompleted={() => {
             tweenRef.current?.play();
           }}
@@ -75,6 +86,7 @@ export const Intro: FC = () => {
           ))}
         </div>
       </div>
+      <ScrollArrow shouldPlayed={scrollAnim} />
     </article>
   );
 };
@@ -88,8 +100,7 @@ const useStyles = makeStyles(
       margin: '0 auto',
       display: 'flex',
       flexDirection: 'column',
-      justifyContent: 'center',
-      position: 'relative'
+      justifyContent: 'center'
     },
     greeting: {
       '& > div': {
