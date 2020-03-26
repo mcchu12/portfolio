@@ -27,7 +27,7 @@ export const Card: FC<Props> = props => {
     if (!animRef.current)
       animRef.current = gsap.from(cardContents, {
         opacity: 0,
-        y: 60,
+        y: 50,
         ease: Power2.easeOut,
         stagger: { amount: 0.5 },
         paused: true
@@ -71,12 +71,11 @@ const useStyles = makeStyles(
       width: '100%',
       display: 'block',
       boxShadow: theme.shadows.smooth2,
-      borderRadius: theme.border.radius,
       cursor: 'pointer',
       transition: 'all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1)',
 
       '&:hover': {
-        transform: 'scale(1.05, 1.05)',
+        transform: 'scale(1.05, 1.05) !important',
         boxShadow: theme.shadows.dreamy,
         transition: 'all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1)'
       }

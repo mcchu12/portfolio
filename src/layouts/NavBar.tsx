@@ -2,9 +2,7 @@ import React, { FC } from 'react';
 import { makeStyles } from '@material-ui/styles';
 
 import { Theme } from 'theme';
-import { Typography } from './Typography';
-import { Logo } from './Logo';
-import { Button } from './Button';
+import { Typography, Button, Logo } from '../components';
 
 export const NavBar: FC = () => {
   const classes = useStyles();
