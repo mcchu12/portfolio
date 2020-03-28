@@ -26,6 +26,8 @@ const useStyles = makeStyles(
     root: {
       margin: '0 auto',
       padding: theme.spacing(0, 3),
+      color: theme.palette.common.white,
+
       [theme.breakpoints.up('sm')]: {
         maxWidth: '80vw',
         padding: theme.spacing(0, 4)

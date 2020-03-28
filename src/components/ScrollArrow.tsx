@@ -26,7 +26,7 @@ export const ScrollArrow: FC<Props> = ({ shouldPlayed = false }) => {
       tl.current
         .from(textRef.current, {
           y: '-100%',
-          duration: 1,
+          duration: 0.7,
           ease: Power1.easeInOut
         })
         .from(
@@ -34,8 +34,8 @@ export const ScrollArrow: FC<Props> = ({ shouldPlayed = false }) => {
           {
             scaleY: 0,
             transformOrigin: 'top',
-            duration: 1,
-            ease: Power1.easeOut
+            duration: 0.7,
+            ease: Power1.easeInOut
           },
           'arrowHeads'
         )
@@ -43,8 +43,8 @@ export const ScrollArrow: FC<Props> = ({ shouldPlayed = false }) => {
           arrowHeads,
           {
             rotate: '0deg',
-            duration: 0.9,
-            ease: Power1.easeOut
+            duration: 0.7,
+            ease: Power1.easeInOut
           },
           'arrowHeads'
         );
@@ -96,13 +96,13 @@ const useStyles = makeStyles(
       }
     },
     arrow: {
-      backgroundColor: theme.palette.common.black,
+      backgroundColor: theme.palette.common.white,
       width: '1px',
       height: '40px',
       position: 'relative',
 
       '& span': {
-        backgroundColor: theme.palette.common.black,
+        backgroundColor: theme.palette.common.white,
         content: '""',
         display: 'block',
         height: '6px',

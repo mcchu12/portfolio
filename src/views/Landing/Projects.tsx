@@ -49,10 +49,11 @@ export const Projects: FC = () => {
 const useStyles = makeStyles(
   (theme: Theme) => ({
     grid: {
-      marginTop: theme.spacing(12),
       display: 'flex',
       flexDirection: 'column',
       [theme.breakpoints.up('md')]: {
+        marginTop: theme.spacing(12),
+
         '& > div:nth-child(even)': {
           marginLeft: 'auto'
         }

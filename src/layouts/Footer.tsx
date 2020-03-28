@@ -11,19 +11,19 @@ export const Footer = () => {
       <section className={classes.contact}>
         <div>
           <Typography variant="overline">Let's work together</Typography>
-          <Typography variant="h6">mcchu95@gmail.com</Typography>
+          <Typography className={classes.hello} variant="h6">
+            Say
+            <span />
+            hello
+          </Typography>
         </div>
         <div className={classes.social}>
-          <Typography variant="overline">Github</Typography>
-          <Typography variant="overline">LinkedIn</Typography>
-          <Typography variant="overline">Instagram</Typography>
+          <img src="./images/email.png" alt="email" />
+          <img src="./images/github.png" alt="github" />
+          <img src="./images/linkedin.png" alt="linkedin" />
         </div>
       </section>
-      <div>
-        <Typography variant="overline">
-          All right reserved @MichaelChu
-        </Typography>
-      </div>
+      <div className={classes.copyright}>All right reserved @MichaelChu</div>
     </footer>
   );
 };
@@ -35,18 +35,53 @@ const useStyles = makeStyles(
     },
 
     contact: {
-      margin: theme.spacing(6, 0, 3),
-      padding: theme.spacing(6, 3),
+      margin: theme.spacing(4, 0, 3),
       display: 'flex',
       justifyContent: 'space-between',
       alignItems: 'center',
-      backgroundColor: theme.palette.background,
-      boxShadow: theme.shadows.default
+      flexWrap: 'wrap',
+
+      '& > div': {
+        margin: theme.spacing(2, 0)
+      }
+    },
+    hello: {
+      display: 'flex',
+      alignItems: 'center',
+      cursor: 'pointer',
+
+      '& span': {
+        height: '2px',
+        width: '48px',
+        margin: theme.spacing(0, 1),
+        display: 'inline-block',
+        backgroundColor: theme.palette.common.white,
+        transition: 'all 0.7s cubic-bezier(0.65, 0, 0.17, 0.98)'
+      },
+
+      '&:hover span': {
+        width: 0,
+        margin: '2px',
+        transition: 'all 0.7s cubic-bezier(0.65, 0, 0.17, 0.98)'
+      }
     },
     social: {
-      '& span': {
-        marginRight: theme.spacing(2)
+      '& img': {
+        width: '16px',
+        margin: theme.spacing(2),
+        cursor: 'pointer',
+        transition: 'transform 0.3s ease-out'
+      },
+
+      '& img:hover': {
+        transform: 'scale(1.2)',
+        transition: 'transform 0.3s ease-out'
       }
+    },
+    copyright: {
+      fontSize: '0.5em',
+      opacity: 0.6,
+      textTransform: 'capitalize'
     }
   }),
   { name: 'footer' }

@@ -29,7 +29,7 @@ export const Background: FC = () => {
         enable: false
       },
       opacity: {
-        value: 0.8,
+        value: 0.5,
         anim: {
           enable: true,
           speed: 1,
@@ -77,7 +77,8 @@ const useStyles = makeStyles(
       bottom: 0,
       left: 0,
       right: 0,
-      zIndex: -10
+      zIndex: -10,
+      background: 'linear-gradient(135deg, #3c3c3c, #000000)'
     }
   }),
   { name: 'background' }

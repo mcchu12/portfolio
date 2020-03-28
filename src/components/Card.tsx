@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useRef } from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { Theme } from 'theme';
-import { gsap, Power2 } from 'gsap';
+import { gsap, Power1 } from 'gsap';
 import { useInView } from 'react-intersection-observer';
 
 import { Typography } from './Typography';
@@ -18,34 +18,32 @@ export const Card: FC<Props> = props => {
   const classes = useStyles();
   const [ref, inView, entry] = useInView({ threshold: 0.5, triggerOnce: true });
   const cardRef = useRef<HTMLDivElement>(null);
-  const animRef = useRef<gsap.core.Tween>();
+  const tween = useRef<gsap.core.Tween>();
 
   useEffect(() => {
     if (!cardRef.current) return;
-    const cardContents = cardRef.current.children;
 
-    if (!animRef.current)
-      animRef.current = gsap.from(cardContents, {
-        opacity: 0,
+    if (!tween.current) {
+      tween.current = gsap.from(cardRef.current, {
         y: 50,
-        ease: Power2.easeOut,
-        stagger: { amount: 0.5 },
+        opacity: 0,
+        ease: Power1.easeOut,
+        duration: 0.7,
         paused: true
       });
+    }
 
     if (inView && entry && entry.intersectionRatio >= 0.5) {
-      animRef.current.play();
+      tween.current.play();
     }
   }, [inView, entry]);
 
   return (
     <div ref={ref} className={classes.root}>
       <div ref={cardRef}>
-        <img
-          className={classes.thumbnail}
-          src={props.thumbnail}
-          alt={props.title}
-        />
+        <div className={classes.thumbnail}>
+          <img src={props.thumbnail} alt={props.title} />
+        </div>
         <div className={classes.title}>
           <Typography variant="h6">{props.title}</Typography>
           <Typography variant="overline">{props.subtitle}</Typography>
@@ -61,27 +59,42 @@ const useStyles = makeStyles(
   (theme: Theme) => ({
     root: {
       position: 'relative',
-      margin: theme.spacing(6, 0),
+      margin: theme.spacing(5, 0),
       [theme.breakpoints.up('md')]: {
         width: '50%'
       },
       zIndex: 2
     },
     thumbnail: {
-      width: '100%',
-      display: 'block',
-      boxShadow: theme.shadows.smooth2,
       cursor: 'pointer',
-      transition: 'all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1)',
+      transition: 'transform 0.7s ease-out',
+      overflow: 'hidden',
+
+      '& img': {
+        width: '100%',
+        display: 'inline-block',
+        verticalAlign: 'bottom',
+        transition: 'transform 0.7s ease-out'
+      },
 
       '&:hover': {
-        transform: 'scale(1.05, 1.05) !important',
-        boxShadow: theme.shadows.dreamy,
-        transition: 'all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1)'
+        transform: 'scale(0.95, 0.95) !important',
+        transition: 'transform 0.7s ease-out'
+      },
+
+      '&:hover > img': {
+        transform: 'scale(1.15, 1.15)',
+        transition: 'transform 0.7s ease-out'
       }
     },
     title: {
-      margin: theme.spacing(3, 0)
+      margin: theme.spacing(3, 0),
+      overflow: 'hidden',
+
+      '& span, & h6': {
+        display: 'block',
+        transition: 'transform 0.7s cubic-bezier(0.65, 0, 0.17, 0.98)'
+      }
     },
     index: {
       display: 'none',

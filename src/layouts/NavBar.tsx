@@ -14,7 +14,7 @@ export const NavBar: FC = () => {
 
         <nav>
           <Button>
-            <Typography variant="subtitle1">About</Typography>
+            <Typography variant="subtitle2">About</Typography>
           </Button>
         </nav>
       </div>

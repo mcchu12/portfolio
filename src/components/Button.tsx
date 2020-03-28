@@ -47,10 +47,10 @@ const useStyles = makeStyles(
         height: '1px',
         bottom: 0,
         left: 0,
-        backgroundColor: theme.palette.common.black,
+        backgroundColor: theme.palette.common.white,
         visibility: 'hidden',
         transform: 'scale(0)',
-        transition: 'all 0.3s ease-in-out'
+        transition: 'all 0.3s cubic-bezier(0.65, 0, 0.17, 0.98)'
       },
       '&:hover:before': {
         visibility: 'visible',
