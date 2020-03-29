@@ -31,7 +31,7 @@ export const Footer = () => {
 const useStyles = makeStyles(
   (theme: Theme) => ({
     root: {
-      marginBottom: theme.spacing(1)
+      padding: theme.spacing(1, 0)
     },
 
     contact: {
@@ -68,19 +68,19 @@ const useStyles = makeStyles(
     social: {
       '& img': {
         width: '16px',
-        margin: theme.spacing(2),
+        margin: theme.spacing(0, 2),
         cursor: 'pointer',
         transition: 'transform 0.3s ease-out'
       },
 
       '& img:hover': {
-        transform: 'scale(1.2)',
+        transform: 'scale(1.3)',
         transition: 'transform 0.3s ease-out'
       }
     },
     copyright: {
       fontSize: '0.5em',
-      opacity: 0.6,
+      opacity: 0.5,
       textTransform: 'capitalize'
     }
   }),

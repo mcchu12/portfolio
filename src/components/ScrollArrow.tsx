@@ -80,10 +80,10 @@ const useStyles = makeStyles(
 
       position: 'absolute',
       bottom: theme.spacing(8),
-      right: theme.spacing(6),
+      right: -theme.spacing(8),
 
       [theme.breakpoints.down('sm')]: {
-        opacity: 0
+        display: 'none'
       }
     },
     text: {

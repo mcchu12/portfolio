@@ -11,12 +11,12 @@ export const Layout: FC = ({ children }) => {
   return (
     <div className={classes.root}>
       <NavBar />
+      <div className={classes.wrapper}>
+        <main>{children}</main>
 
-      <main>{children}</main>
-
+        <Footer />
+      </div>
       <Background />
-
-      <Footer />
     </div>
   );
 };
@@ -24,9 +24,14 @@ export const Layout: FC = ({ children }) => {
 const useStyles = makeStyles(
   (theme: Theme) => ({
     root: {
+      background: theme.palette.common.black
+    },
+    wrapper: {
       margin: '0 auto',
       padding: theme.spacing(0, 3),
       color: theme.palette.common.white,
+      position: 'relative',
+      zIndex: 1,
 
       [theme.breakpoints.up('sm')]: {
         maxWidth: '80vw',

@@ -74,10 +74,9 @@ const useStyles = makeStyles(
     root: {
       position: 'fixed',
       top: 0,
-      bottom: 0,
       left: 0,
       right: 0,
-      zIndex: -10,
+      bottom: 0,
       background: 'linear-gradient(135deg, #3c3c3c, #000000)'
     }
   }),

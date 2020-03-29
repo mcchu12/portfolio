@@ -100,7 +100,8 @@ const useStyles = makeStyles(
       margin: '0 auto',
       display: 'flex',
       flexDirection: 'column',
-      justifyContent: 'center'
+      justifyContent: 'center',
+      position: 'relative'
     },
     greeting: {
       '& > div': {
