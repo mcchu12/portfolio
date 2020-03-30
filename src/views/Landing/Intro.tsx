@@ -40,6 +40,10 @@ export const Intro: FC = () => {
         }
       }
     );
+
+    return () => {
+      tweenRef.current?.kill();
+    };
   }, [buttonElements]);
 
   const renderIntro = () => {
@@ -115,5 +119,5 @@ const useStyles = makeStyles(
       }
     }
   }),
-  { name: 'intro' }
+  { name: 'introduction' }
 );

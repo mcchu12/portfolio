@@ -59,6 +59,10 @@ export const AnimatedText: FC<Props> = ({
       });
 
     if (shouldPlayed) tweenRef.current.play();
+
+    return () => {
+      tweenRef.current?.kill();
+    };
   }, [charsElements, shouldPlayed, onTweenCompleted, delay, state]);
 
   const splitStyles = { display: 'inline-block' };

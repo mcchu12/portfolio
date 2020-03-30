@@ -31,7 +31,9 @@ export const Footer = () => {
 const useStyles = makeStyles(
   (theme: Theme) => ({
     root: {
-      padding: theme.spacing(1, 0)
+      padding: theme.spacing(1, 0),
+      position: 'relative',
+      zIndex: 2
     },
 
     contact: {

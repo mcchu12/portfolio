@@ -4,7 +4,7 @@ import { ConnectedRouter } from 'connected-react-router';
 
 import { history } from './store';
 import { theme } from './theme';
-import { Routes } from './Routes';
+import { Routes } from './routes';
 
 function App() {
   return (

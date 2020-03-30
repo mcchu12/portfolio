@@ -1,10 +1,18 @@
 import React, { FC } from 'react';
 import { makeStyles } from '@material-ui/styles';
+import { connect } from 'react-redux';
+import { push } from 'connected-react-router';
 
 import { Theme } from 'theme';
 import { Typography, Button, Logo } from '../components';
 
-export const NavBar: FC = () => {
+const dispatchProps = {
+  routeToAbout: () => push('./about')
+};
+
+type Props = typeof dispatchProps;
+
+const _NavBar: FC<Props> = ({ routeToAbout }) => {
   const classes = useStyles();
 
   return (
@@ -13,7 +21,7 @@ export const NavBar: FC = () => {
         <Logo />
 
         <nav>
-          <Button>
+          <Button onClick={routeToAbout}>
             <Typography variant="subtitle2">About</Typography>
           </Button>
         </nav>
@@ -21,6 +29,8 @@ export const NavBar: FC = () => {
     </header>
   );
 };
+
+export const NavBar = connect(null, dispatchProps)(_NavBar);
 
 const useStyles = makeStyles<Theme>(
   theme => ({
