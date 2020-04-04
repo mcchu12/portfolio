@@ -5,39 +5,7 @@ export const BORDERS = {
 };
 
 export const SHADOWS = {
-  default: `0 1px 2px rgba(0, 0, 0, 0.1)`,
-  shorter: `0 1px 1px rgba(0,0,0,0.11), 
-  0 2px 2px rgba(0,0,0,0.11), 
-  0 4px 4px rgba(0,0,0,0.11), 
-  0 6px 8px rgba(0,0,0,0.11),
-  0 8px 16px rgba(0,0,0,0.11)`,
-  diffuse: `0 1px 1px rgba(0,0,0,0.08), 
-  0 2px 2px rgba(0,0,0,0.12), 
-  0 4px 4px rgba(0,0,0,0.16), 
-  0 8px 8px rgba(0,0,0,0.20)`,
-  smooth2: `0 1px 1px rgba(0,0,0,0.18), 
-  0 2px 2px rgba(0,0,0,0.15)`,
-  smooth4: `0 1px 1px rgba(0,0,0,0.18), 
-  0 2px 2px rgba(0,0,0,0.15), 
-  0 4px 4px rgba(0,0,0,0.15), 
-  0 8px 8px rgba(0,0,0,0.15)`,
-  smooth5: `0 1px 1px rgba(0,0,0,0.12), 
-  0 2px 2px rgba(0,0,0,0.12), 
-  0 4px 4px rgba(0,0,0,0.12), 
-  0 8px 8px rgba(0,0,0,0.12),
-  0 16px 16px rgba(0,0,0,0.12)`,
-  smooth6: `0 1px 1px rgba(0,0,0,0.11), 
-  0 2px 2px rgba(0,0,0,0.11), 
-  0 4px 4px rgba(0,0,0,0.11), 
-  0 8px 8px rgba(0,0,0,0.11), 
-  0 16px 16px rgba(0,0,0,0.11), 
-  0 32px 32px rgba(0,0,0,0.11)`,
-  dreamy: `0 1px 2px rgba(0,0,0,0.07), 
-  0 2px 4px rgba(0,0,0,0.07), 
-  0 4px 8px rgba(0,0,0,0.07), 
-  0 8px 16px rgba(0,0,0,0.07),
-  0 16px 32px rgba(0,0,0,0.07), 
-  0 32px 64px rgba(0,0,0,0.07)`
+  default: `0 1px 2px rgba(0, 0, 0, 0.1)`
 };
 
 export const BREAKPOINTS = {
@@ -55,7 +23,7 @@ export const BREAKPOINTS = {
 export const COLORS = {
   white: '#FFFFFF',
   black: '#000000',
-  background: '#F5F5F5',
+  background: '#171717',
   textPrimary: '#000000'
 };
 

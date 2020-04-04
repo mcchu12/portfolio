@@ -18,10 +18,7 @@ export const Landing: FC = () => {
 
 const useStyles = makeStyles(
   () => ({
-    root: {
-      position: 'relative',
-      zIndex: 2
-    }
+    root: {}
   }),
   { name: 'landing' }
 );

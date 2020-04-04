@@ -24,11 +24,13 @@ export const Layout: FC = ({ children }) => {
 const useStyles = makeStyles(
   (theme: Theme) => ({
     root: {
-      background: theme.palette.common.black
+      backgroundColor: theme.palette.background
     },
     wrapper: {
       margin: '0 auto',
       padding: theme.spacing(0, 3),
+      position: 'relative',
+      zIndex: 2,
       color: theme.palette.common.white,
 
       [theme.breakpoints.up('sm')]: {

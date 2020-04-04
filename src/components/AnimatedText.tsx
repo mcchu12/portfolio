@@ -1,4 +1,4 @@
-import React, { FC, useRef, useEffect, useState } from 'react';
+import React, { PureComponent } from 'react';
 import { gsap, Power4 } from 'gsap';
 
 type State = {
@@ -12,6 +12,7 @@ type Props = {
   shouldPlayed?: boolean;
   onTweenCompleted?: () => void;
   delay?: number;
+  children: string;
 };
 
 const parseText = (text: string) => {
@@ -22,92 +23,90 @@ const parseText = (text: string) => {
   };
 };
 
-export const AnimatedText: FC<Props> = ({
-  children,
-  shouldPlayed = true,
-  onTweenCompleted,
-  delay
-}) => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const tweenRef = useRef<gsap.core.Tween>();
+export class AnimatedText extends PureComponent<Props, State> {
+  static getDerivedStateFromProps({ children }: Props, state: State) {
+    return !state || children !== state.text ? parseText(children) : null;
+  }
 
-  const [state, setState] = useState<State>({
+  state = {
     text: '',
     splitText: [],
     numChars: 0,
     isAnimationComplete: false
-  });
+  };
 
-  const charsElements: HTMLDivElement[] = [];
+  charsElements: HTMLSpanElement[] = [];
+  containerRef: HTMLDivElement | null = null;
+  tween: gsap.core.Tween | null = null;
 
-  if (typeof children === 'string' && state.text !== children)
-    setState({ ...state, ...parseText(children) });
+  componentDidMount() {
+    this.tween = gsap.from(this.charsElements, {
+      duration: 0.01,
+      autoAlpha: 0,
+      delay: this.props.delay || 0.2,
+      ease: Power4.easeIn,
+      stagger: 0.06,
+      paused: true,
+      onComplete: () => {
+        this.setState({ ...this.state, isAnimationComplete: true });
+        this.props.onTweenCompleted && this.props.onTweenCompleted();
+      }
+    });
 
-  useEffect(() => {
-    if (!tweenRef.current)
-      tweenRef.current = gsap.from(charsElements, {
-        duration: 0.01,
-        opacity: 0,
-        delay: delay || 0.2,
-        ease: Power4.easeIn,
-        stagger: 0.06,
-        paused: true,
-        onComplete: () => {
-          setState({ ...state, isAnimationComplete: true });
-          onTweenCompleted && onTweenCompleted();
-        }
-      });
+    if (this.props.shouldPlayed) {
+      this.tween.play();
+    }
+  }
 
-    if (shouldPlayed) tweenRef.current.play();
+  componentDidUpdate() {
+    if (this.props.shouldPlayed && !this.state.isAnimationComplete) {
+      this.tween?.play();
+    }
+  }
 
-    return () => {
-      tweenRef.current?.kill();
-    };
-  }, [charsElements, shouldPlayed, onTweenCompleted, delay, state]);
+  componentWillUnmount() {
+    this.tween?.kill();
+  }
 
-  const splitStyles = { display: 'inline-block' };
-
-  const renderChars = (word: string[]) => {
-    const { text } = state;
+  renderChars = (word: string[]) => {
+    const { text } = this.state;
 
     const chars = word.map((char, i) => (
-      <div
-        key={text + i}
-        style={splitStyles}
-        ref={el => el && charsElements.push(el)}
-      >
+      <span key={text + i} ref={el => el && this.charsElements.push(el)}>
         {char}
-      </div>
+      </span>
     ));
 
     return chars;
   };
 
-  const renderWords = () => {
-    const { text, splitText } = state;
+  renderWords = () => {
+    const { text, splitText } = this.state;
 
     const numWords = splitText.length;
 
     return splitText.map((word, i) => {
       const chars = [
-        ...renderChars(word),
+        ...this.renderChars(word),
         i !== numWords - 1 ? '\u00A0' : null
       ];
 
-      return (
-        <div key={text! + i} style={{ display: 'inline-block' }}>
-          {chars}
-        </div>
-      );
+      return <span key={text! + i}>{chars}</span>;
     });
   };
 
-  return (
-    <div>
-      <div className="sr-only">{state.text}</div>
-      <div aria-hidden ref={containerRef}>
-        {renderWords()}
+  render() {
+    const { isAnimationComplete } = this.state;
+    return (
+      <div>
+        {isAnimationComplete && <div>{this.state.text}</div>}
+
+        {!isAnimationComplete && (
+          <div aria-hidden ref={div => (this.containerRef = div)}>
+            {this.renderWords()}
+          </div>
+        )}
       </div>
-    </div>
-  );
-};
+    );
+  }
+}

@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useRef } from 'react';
+import React, { FC, useEffect, useRef, memo } from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { Theme } from 'theme';
 import { gsap, Power1 } from 'gsap';
@@ -14,7 +14,7 @@ type Props = {
   onImageLoaded?: () => void;
 };
 
-export const Card: FC<Props> = props => {
+const _Card: FC<Props> = props => {
   const classes = useStyles();
   const [ref, inView, entry] = useInView({ threshold: 0.5, triggerOnce: true });
   const cardRef = useRef<HTMLDivElement>(null);
@@ -26,16 +26,24 @@ export const Card: FC<Props> = props => {
     if (!tween.current) {
       tween.current = gsap.from(cardRef.current, {
         y: 50,
-        opacity: 0,
+        rotation: 0.01,
+        autoAlpha: 0,
         ease: Power1.easeOut,
         duration: 0.7,
-        paused: true
+        paused: true,
+        onComplete: () => {
+          gsap.set(cardRef.current, { clearProps: 'all' });
+        }
       });
     }
 
     if (inView && entry && entry.intersectionRatio >= 0.5) {
       tween.current.play();
     }
+
+    return () => {
+      tween.current?.kill();
+    };
   }, [inView, entry]);
 
   return (
@@ -55,6 +63,8 @@ export const Card: FC<Props> = props => {
   );
 };
 
+export const Card = memo(_Card);
+
 const useStyles = makeStyles(
   (theme: Theme) => ({
     root: {
@@ -62,8 +72,7 @@ const useStyles = makeStyles(
       margin: theme.spacing(5, 0),
       [theme.breakpoints.up('md')]: {
         width: '50%'
-      },
-      zIndex: 2
+      }
     },
     thumbnail: {
       cursor: 'pointer',
@@ -78,7 +87,7 @@ const useStyles = makeStyles(
       },
 
       '&:hover': {
-        transform: 'scale(0.95, 0.95) !important',
+        transform: 'scale(0.95, 0.95)',
         transition: 'transform 0.7s ease-out'
       },
 
@@ -88,13 +97,7 @@ const useStyles = makeStyles(
       }
     },
     title: {
-      margin: theme.spacing(3, 0),
-      overflow: 'hidden',
-
-      '& span, & h6': {
-        display: 'block',
-        transition: 'transform 0.7s cubic-bezier(0.65, 0, 0.17, 0.98)'
-      }
+      margin: theme.spacing(3, 0)
     },
     index: {
       display: 'none',

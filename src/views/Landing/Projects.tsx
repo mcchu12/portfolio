@@ -51,6 +51,7 @@ const useStyles = makeStyles(
     grid: {
       display: 'flex',
       flexDirection: 'column',
+
       [theme.breakpoints.up('md')]: {
         marginTop: theme.spacing(12),
 

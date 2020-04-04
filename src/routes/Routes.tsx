@@ -1,18 +1,28 @@
 import React, { FC } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Route } from 'react-router-dom';
+import { RootState } from 'typesafe-actions';
+import { connect } from 'react-redux';
 
 import { Layout } from '../layouts';
+import { AnimatedRouter } from './AnimatedRouter';
+
 import { Landing as LandingView, About as AboutView } from '../views';
 
-import { AnimatedRoute } from './AnimatedRoute';
+const mapStateToProps = (state: RootState) => ({
+  location: state.router.location
+});
 
-export const Routes: FC = () => {
+type Props = ReturnType<typeof mapStateToProps>;
+
+const _Routes: FC<Props> = props => {
   return (
     <Layout>
-      <Switch>
+      <AnimatedRouter>
         <Route exact path="/" component={LandingView} />
-        <AnimatedRoute path="/about" appear component={AboutView} />
-      </Switch>
+        <Route exact path="/about" component={AboutView} />
+      </AnimatedRouter>
     </Layout>
   );
 };
+
+export const Routes = connect(mapStateToProps, {})(_Routes);

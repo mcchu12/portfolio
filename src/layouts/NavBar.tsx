@@ -7,18 +7,19 @@ import { Theme } from 'theme';
 import { Typography, Button, Logo } from '../components';
 
 const dispatchProps = {
+  routeToHome: () => push('/'),
   routeToAbout: () => push('./about')
 };
 
 type Props = typeof dispatchProps;
 
-const _NavBar: FC<Props> = ({ routeToAbout }) => {
+const _NavBar: FC<Props> = ({ routeToAbout, routeToHome }) => {
   const classes = useStyles();
 
   return (
     <header className={classes.root}>
       <div className={classes.toolbar}>
-        <Logo />
+        <Logo onClick={routeToHome} />
 
         <nav>
           <Button onClick={routeToAbout}>
@@ -39,7 +40,7 @@ const useStyles = makeStyles<Theme>(
       top: 0,
       left: 0,
       right: 0,
-      zIndex: 1000,
+      zIndex: 10,
       color: theme.palette.common.white
     },
     toolbar: {

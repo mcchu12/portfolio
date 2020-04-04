@@ -1,10 +1,11 @@
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 import Particles, { IParticlesParams } from 'react-particles-js';
 import { makeStyles } from '@material-ui/styles';
-import { Theme } from 'theme';
 
-export const Background: FC = () => {
+const _Background: FC = () => {
   const classes = useStyles();
+
+  const isFirefox = 'InstallTrigger' in window && true;
 
   const options: IParticlesParams = {
     particles: {
@@ -66,18 +67,24 @@ export const Background: FC = () => {
     }
   };
 
-  return <Particles className={classes.root} params={options} />;
+  return !isFirefox ? (
+    <Particles className={classes.root} params={options} />
+  ) : (
+    <></>
+  );
 };
 
+export const Background = memo(_Background);
+
 const useStyles = makeStyles(
-  (theme: Theme) => ({
+  () => ({
     root: {
-      position: 'fixed',
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 0,
-      background: 'linear-gradient(135deg, #3c3c3c, #000000)'
+      '& canvas': {
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        background: 'linear-gradient(135deg, #3c3c3c, #000000)'
+      }
     }
   }),
   { name: 'background' }
