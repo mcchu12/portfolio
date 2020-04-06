@@ -27,7 +27,7 @@ export const ScrollArrow: FC<Props> = ({ shouldPlayed = false }) => {
         .from(textRef.current, {
           y: '-100%',
           duration: 0.7,
-          ease: Power1.easeInOut
+          ease: Power1.easeInOut,
         })
         .from(
           shaftRef.current,
@@ -35,7 +35,7 @@ export const ScrollArrow: FC<Props> = ({ shouldPlayed = false }) => {
             scaleY: 0,
             transformOrigin: 'top',
             duration: 0.7,
-            ease: Power1.easeInOut
+            ease: Power1.easeInOut,
           },
           'arrowHeads'
         )
@@ -44,7 +44,7 @@ export const ScrollArrow: FC<Props> = ({ shouldPlayed = false }) => {
           {
             rotate: '0deg',
             duration: 0.7,
-            ease: Power1.easeInOut
+            ease: Power1.easeInOut,
           },
           'arrowHeads'
         );
@@ -81,10 +81,11 @@ const useStyles = makeStyles(
       position: 'absolute',
       bottom: theme.spacing(8),
       right: -theme.spacing(8),
+      opacity: 0.5,
 
       [theme.breakpoints.down('sm')]: {
-        display: 'none'
-      }
+        display: 'none',
+      },
     },
     text: {
       marginBottom: theme.spacing(1),
@@ -92,8 +93,8 @@ const useStyles = makeStyles(
       overflow: 'hidden',
 
       '& span': {
-        display: 'block'
-      }
+        display: 'block',
+      },
     },
     arrow: {
       backgroundColor: theme.palette.common.white,
@@ -109,19 +110,19 @@ const useStyles = makeStyles(
         width: '1px',
         position: 'absolute',
         bottom: 0,
-        right: 0
+        right: 0,
       },
 
       '& span:first-child': {
         transformOrigin: 'bottom left',
-        transform: 'rotate(45deg)'
+        transform: 'rotate(45deg)',
       },
 
       '& span:last-child': {
         transformOrigin: 'bottom right',
-        transform: 'rotate(-45deg)'
-      }
-    }
+        transform: 'rotate(-45deg)',
+      },
+    },
   }),
   { name: 'scroll' }
 );

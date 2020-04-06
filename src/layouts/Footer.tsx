@@ -10,7 +10,9 @@ export const Footer = () => {
     <footer className={classes.root}>
       <section className={classes.contact}>
         <div>
-          <Typography variant="overline">Let's work together</Typography>
+          <Typography className={classes.title} variant="overline">
+            Let's work together
+          </Typography>
           <Typography className={classes.hello} variant="h6">
             Say
             <span />
@@ -31,7 +33,7 @@ export const Footer = () => {
 const useStyles = makeStyles(
   (theme: Theme) => ({
     root: {
-      padding: theme.spacing(1, 0)
+      padding: theme.spacing(1, 0),
     },
 
     contact: {
@@ -42,8 +44,12 @@ const useStyles = makeStyles(
       flexWrap: 'wrap',
 
       '& > div': {
-        margin: theme.spacing(2, 0)
-      }
+        margin: theme.spacing(2, 0),
+      },
+    },
+    title: {
+      opacity: 0.5,
+      fontWeight: 500,
     },
     hello: {
       display: 'flex',
@@ -56,33 +62,33 @@ const useStyles = makeStyles(
         margin: theme.spacing(0, 1),
         display: 'inline-block',
         backgroundColor: theme.palette.common.white,
-        transition: 'all 0.7s cubic-bezier(0.65, 0, 0.17, 0.98)'
+        transition: 'all 0.7s cubic-bezier(0.65, 0, 0.17, 0.98)',
       },
 
       '&:hover span': {
         width: 0,
         margin: '2px',
-        transition: 'all 0.7s cubic-bezier(0.65, 0, 0.17, 0.98)'
-      }
+        transition: 'all 0.7s cubic-bezier(0.65, 0, 0.17, 0.98)',
+      },
     },
     social: {
       '& img': {
         width: '16px',
         margin: theme.spacing(0, 2),
         cursor: 'pointer',
-        transition: 'transform 0.3s ease-out'
+        transition: 'transform 0.3s ease-out',
       },
 
       '& img:hover': {
         transform: 'scale(1.3)',
-        transition: 'transform 0.3s ease-out'
-      }
+        transition: 'transform 0.3s ease-out',
+      },
     },
     copyright: {
       fontSize: '0.5em',
       opacity: 0.5,
-      textTransform: 'capitalize'
-    }
+      textTransform: 'capitalize',
+    },
   }),
   { name: 'footer' }
 );

@@ -5,12 +5,15 @@ import { gsap, Power1 } from 'gsap';
 
 export const AnimatedRouter: FC = ({ children }) => {
   const handleOnEnter = (node: HTMLElement) => {
+    const parent = node.parentElement;
+    const targetWidth = parent?.clientWidth;
     gsap.set(node, {
       position: 'fixed',
-      y: 100,
+      y: 50,
       rotation: 0.01,
       autoAlpha: 0,
-      willChange: 'transform'
+      willChange: 'transform',
+      width: targetWidth,
     });
 
     gsap.to(node, {
@@ -19,29 +22,29 @@ export const AnimatedRouter: FC = ({ children }) => {
       duration: 1,
       ease: Power1.easeInOut,
       force3D: true,
-      onComplete: node => {
+      onComplete: (node) => {
         gsap.set(node, { clearProps: 'all' });
       },
-      onCompleteParams: [node]
+      onCompleteParams: [node],
     });
   };
 
   const handleOnExisting = (node: HTMLElement) => {
     gsap.set(node, {
       willChange: 'transform',
-      rotation: 0.01
+      rotation: 0.01,
     });
 
     gsap.to(node, {
-      y: 100,
+      y: 50,
       autoAlpha: 0,
       duration: 1,
       ease: Power1.easeInOut,
       force3D: true,
-      onComplete: node => {
+      onComplete: (node) => {
         gsap.set(node, { clearProps: 'all' });
       },
-      onCompleteParams: [node]
+      onCompleteParams: [node],
     });
   };
 

@@ -5,10 +5,11 @@ import { Theme } from 'theme';
 
 type Props = {
   onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  active?: boolean;
 };
 
-export const Button: FC<Props> = ({ children, onClick }) => {
-  const classes = useStyles();
+export const Button: FC<Props> = ({ children, onClick, active = false }) => {
+  const classes = useStyles({ active });
 
   return (
     <button className={clsx(classes.root, classes.default)} onClick={onClick}>
@@ -17,8 +18,8 @@ export const Button: FC<Props> = ({ children, onClick }) => {
   );
 };
 
-const useStyles = makeStyles(
-  (theme: Theme) => ({
+const useStyles = makeStyles<Theme, { active: boolean }>(
+  (theme) => ({
     root: {
       background: 'none',
       border: 'none',
@@ -27,8 +28,8 @@ const useStyles = makeStyles(
       color: 'inherit',
 
       '&:focus': {
-        outline: 0
-      }
+        outline: 0,
+      },
     },
     default: {
       position: 'relative',
@@ -41,15 +42,15 @@ const useStyles = makeStyles(
         bottom: 0,
         left: 0,
         backgroundColor: theme.palette.common.white,
-        visibility: 'hidden',
-        transform: 'scale(0)'
+        visibility: (props) => (props.active ? 'visible' : 'hidden'),
+        transform: (props) => (props.active ? 'scale(1)' : 'scale(0)'),
       },
       '&:hover:before': {
         visibility: 'visible',
         transition: 'transform 0.3s cubic-bezier(0.65, 0, 0.17, 0.98)',
-        transform: 'scale(1)'
-      }
-    }
+        transform: 'scale(1)',
+      },
+    },
   }),
   { name: 'button' }
 );
