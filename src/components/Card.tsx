@@ -11,10 +11,10 @@ type Props = {
   title?: string;
   subtitle?: string;
   index?: string;
-  onImageLoaded?: () => void;
+  url: string;
 };
 
-const _Card: FC<Props> = props => {
+const _Card: FC<Props> = ({ thumbnail, title, subtitle, index, url }) => {
   const classes = useStyles();
   const [ref, inView, entry] = useInView({ threshold: 0.5, triggerOnce: true });
   const cardRef = useRef<HTMLDivElement>(null);
@@ -33,7 +33,7 @@ const _Card: FC<Props> = props => {
         paused: true,
         onComplete: () => {
           gsap.set(cardRef.current, { clearProps: 'all' });
-        }
+        },
       });
     }
 
@@ -46,19 +46,32 @@ const _Card: FC<Props> = props => {
     };
   }, [inView, entry]);
 
+  const openExternalLink = (url: string) => {
+    window.open(url, '_blank');
+  };
+
   return (
     <div ref={ref} className={classes.root}>
       <div ref={cardRef}>
-        <div className={classes.thumbnail}>
-          <img src={props.thumbnail} alt={props.title} />
-        </div>
+        <a href={url} target="_blank" rel="noopener noreferrer">
+          <div className={classes.thumbnail}>
+            <img src={thumbnail} alt={title} />
+          </div>
+        </a>
         <div className={classes.title}>
-          <Typography variant="h6">{props.title}</Typography>
-          <Typography variant="overline">{props.subtitle}</Typography>
+          <Typography variant="h6">
+            <span
+              className={classes.pointer}
+              onClick={() => openExternalLink(url)}
+            >
+              {title}
+            </span>
+          </Typography>
+          <Typography variant="overline">{subtitle}</Typography>
         </div>
       </div>
 
-      <div className={classes.index}>{props.index}</div>
+      <div className={classes.index}>{index}</div>
     </div>
   );
 };
@@ -71,11 +84,10 @@ const useStyles = makeStyles(
       position: 'relative',
       margin: theme.spacing(5, 0),
       [theme.breakpoints.up('md')]: {
-        width: '50%'
-      }
+        width: '50%',
+      },
     },
     thumbnail: {
-      cursor: 'pointer',
       transition: 'transform 0.7s ease-out',
       overflow: 'hidden',
 
@@ -83,21 +95,24 @@ const useStyles = makeStyles(
         width: '100%',
         display: 'inline-block',
         verticalAlign: 'bottom',
-        transition: 'transform 0.7s ease-out'
+        transition: 'transform 0.7s ease-out',
       },
 
       '&:hover': {
         transform: 'scale(0.95, 0.95)',
-        transition: 'transform 0.7s ease-out'
+        transition: 'transform 0.7s ease-out',
       },
 
       '&:hover > img': {
         transform: 'scale(1.15, 1.15)',
-        transition: 'transform 0.7s ease-out'
-      }
+        transition: 'transform 0.7s ease-out',
+      },
     },
     title: {
-      margin: theme.spacing(3, 0)
+      margin: theme.spacing(3, 0),
+    },
+    pointer: {
+      cursor: 'pointer',
     },
     index: {
       display: 'none',
@@ -111,9 +126,9 @@ const useStyles = makeStyles(
         fontSize: '152px',
         fontWeight: 700,
         letterSpacing: '8px',
-        zIndex: -1
-      }
-    }
+        zIndex: -1,
+      },
+    },
   }),
   { name: 'card' }
 );

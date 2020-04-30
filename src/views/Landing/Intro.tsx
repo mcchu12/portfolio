@@ -7,10 +7,17 @@ import {
   Button,
   Typography,
   AnimatedText,
-  ScrollArrow
+  ScrollArrow,
 } from '../../components';
 
-const connections = ['github', 'linkedin', 'resume'];
+const connections = [
+  { platform: 'github', url: 'https://github.com/mcchu12' },
+  {
+    platform: 'linkedin',
+    url: 'https://www.linkedin.com/in/nguyen-chuong-chu-96b7911a8/',
+  },
+  // { platform: 'resume', url: 'https://github.com/mcchu12' },
+];
 
 type Props = {
   classes: {
@@ -31,7 +38,7 @@ class _Intro extends React.Component<Props, State> {
 
   state = {
     textAnim: 0,
-    scrollAnim: false
+    scrollAnim: false,
   };
 
   componentDidMount() {
@@ -51,7 +58,7 @@ class _Intro extends React.Component<Props, State> {
       onComplete: () => {
         this.setState({ ...this.state, scrollAnim: true });
         gsap.set(btns, { clearProps: 'all' });
-      }
+      },
     });
   }
 
@@ -96,12 +103,16 @@ class _Intro extends React.Component<Props, State> {
         {this.renderIntro()}
 
         <div
-          ref={el => (this.buttonContainer = el)}
+          ref={(el) => (this.buttonContainer = el)}
           className={classes.socialLink}
         >
-          {connections.map((connection, index) => (
+          {connections.map(({ platform, url }, index) => (
             <Button key={index}>
-              <Typography variant="overline">{connection}</Typography>
+              <Typography variant="overline">
+                <a href={url} target="_blank" rel="noopener noreferrer">
+                  {platform}
+                </a>
+              </Typography>
             </Button>
           ))}
         </div>
@@ -121,19 +132,19 @@ const styles = (theme: Theme) =>
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'center',
-      position: 'relative'
+      position: 'relative',
     },
     greeting: {
       '& > div': {
-        ...theme.typography.h5
-      }
+        ...theme.typography.h5,
+      },
     },
     socialLink: {
       marginTop: theme.spacing(1.5),
       '& button': {
-        marginRight: theme.spacing(3)
-      }
-    }
+        marginRight: theme.spacing(3),
+      },
+    },
   });
 
 export const Intro = withStyles(styles)(_Intro);

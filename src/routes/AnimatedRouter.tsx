@@ -12,7 +12,6 @@ export const AnimatedRouter: FC = ({ children }) => {
       y: 50,
       rotation: 0.01,
       autoAlpha: 0,
-      willChange: 'transform',
       width: targetWidth,
     });
 
@@ -31,7 +30,6 @@ export const AnimatedRouter: FC = ({ children }) => {
 
   const handleOnExisting = (node: HTMLElement) => {
     gsap.set(node, {
-      willChange: 'transform',
       rotation: 0.01,
     });
 

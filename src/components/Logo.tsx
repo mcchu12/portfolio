@@ -6,12 +6,12 @@ type Props = {
   onClick?: () => void;
 };
 
-const _Logo: FC<Props> = props => {
+const _Logo: FC<Props> = (props) => {
   const classes = useStyles();
 
   return (
     <div className={classes.root} onClick={props.onClick}>
-      <img src="/images/logo.png" alt="logo" />
+      <img src="/icons/logo.png" alt="logo" />
     </div>
   );
 };
@@ -25,9 +25,9 @@ const useStyles = makeStyles(
       '& img': {
         width: '100%',
         maxWidth: theme.spacing(4),
-        maxHeight: theme.spacing(4)
-      }
-    }
+        maxHeight: theme.spacing(4),
+      },
+    },
   }),
   { name: 'logo' }
 );

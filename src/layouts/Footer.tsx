@@ -4,6 +4,29 @@ import { Theme } from 'theme';
 
 import { Typography } from '../components';
 
+const socials = [
+  {
+    url: 'mailto:ngcgchu@gmail.com?subject=Inquiry',
+    icon: '/icons/email.png',
+    name: 'email',
+  },
+  {
+    url: 'https://github.com/mcchu12',
+    icon: '/icons/github.png',
+    name: 'github',
+  },
+  {
+    url: 'https://www.linkedin.com/in/nguyen-chuong-chu-96b7911a8/',
+    icon: '/icons/linkedin.png',
+    name: 'linkedin',
+  },
+  {
+    url: 'https://twitter.com/mcchu0',
+    icon: '/icons/twitter.png',
+    name: 'twitter',
+  },
+];
+
 export const Footer = () => {
   const classes = useStyles();
   return (
@@ -13,16 +36,20 @@ export const Footer = () => {
           <Typography className={classes.title} variant="overline">
             Let's work together
           </Typography>
-          <Typography className={classes.hello} variant="h6">
-            Say
-            <span />
-            hello
-          </Typography>
+          <a href="mailto:ngcgchu@gmail.com?subject=Inquiry">
+            <Typography className={classes.hello} variant="h6">
+              Say
+              <span />
+              hello
+            </Typography>
+          </a>
         </div>
         <div className={classes.social}>
-          <img src="./images/email.png" alt="email" />
-          <img src="./images/github.png" alt="github" />
-          <img src="./images/linkedin.png" alt="linkedin" />
+          {socials.map(({ url, icon, name }, index) => (
+            <a href={url} key={index}>
+              <img src={icon} alt={name} />
+            </a>
+          ))}
         </div>
       </section>
       <div className={classes.copyright}>All right reserved @MichaelChu</div>

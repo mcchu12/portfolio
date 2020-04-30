@@ -9,25 +9,29 @@ const projects = [
     index: '01',
     title: 'Crumbs',
     subtitle: 'HTML / CSS / JS',
-    thumbnail: './images/crumbs2.jpg',
+    thumbnail: './images/crumbs.jpg',
+    url: 'https://crumbs-3c245.web.app/',
   },
   {
     index: '02',
     title: 'Dogify',
     subtitle: 'Angular2 / Python / Flask',
     thumbnail: './images/dogify.jpg',
+    url: 'https://dogifi.herokuapp.com/',
   },
   {
     index: '03',
     title: 'Leahlou',
     subtitle: 'React / Redux',
     thumbnail: './images/leahlou.jpg',
+    url: 'https://leahlouabellanosa.co/',
   },
   {
     index: '04',
     title: 'Dollar',
     subtitle: 'React / Redux',
-    thumbnail: './images/crumbs.jpg',
+    thumbnail: './images/dollar.jpg',
+    url: 'https://onroll.web.app/',
   },
 ];
 

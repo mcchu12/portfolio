@@ -16,7 +16,7 @@ const variantMapping = {
   body2: 'p',
   span: 'span',
   caption: 'span',
-  overline: 'span'
+  overline: 'span',
 };
 
 type Variant = keyof typeof variantMapping;
@@ -42,7 +42,7 @@ export const Typography = React.forwardRef<
       variant !== 'span' && classes[variant]
     ),
     ref: ref,
-    children: props.children
+    children: props.children,
   });
 });
 
@@ -60,7 +60,7 @@ const useStyles = makeStyles(
     subtitle1: theme.typography.subtitle1,
     subtitle2: theme.typography.subtitle2,
     caption: theme.typography.caption,
-    overline: theme.typography.overline
+    overline: theme.typography.overline,
   }),
   { name: 'typography' }
 );
