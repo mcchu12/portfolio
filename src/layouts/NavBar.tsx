@@ -13,7 +13,7 @@ const mapStateToProps = (state: RootState) => ({
 
 const dispatchProps = {
   routeToHome: () => push('/'),
-  routeToAbout: () => push('./about'),
+  routeToAbout: () => push('/about'),
 };
 
 type Props = ReturnType<typeof mapStateToProps> & typeof dispatchProps;

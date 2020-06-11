@@ -22,6 +22,10 @@ a {
   color: inherit;
 }
 
+li {
+  list-style-type: none;
+}
+
 #root {
   height: 100%;
 }
@@ -35,4 +39,12 @@ a {
   padding: 0;
   position: absolute;
   width: 1px;
+}
+
+.simplebar-scrollbar {
+  opacity: 0.3;
+}
+
+.simplebar-scrollbar::before {
+  background: white;
 }

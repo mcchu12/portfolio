@@ -8,7 +8,13 @@ const createPalette = (colors: Colors) => {
       white: colors.white,
       black: colors.black
     },
-    background: colors.background
+    text: {
+      primary: colors.white,
+      primaryLight: colors.textPrimaryLight
+    },
+    background: colors.background,
+    border: colors.lightGray
+
   };
 };
 

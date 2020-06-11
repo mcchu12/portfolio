@@ -24,7 +24,9 @@ export const COLORS = {
   white: '#FFFFFF',
   black: '#000000',
   background: '#171717',
-  textPrimary: '#000000'
+  textPrimary: '#000000',
+  textPrimaryLight: '#CFCFCF',
+  lightGray: '#4a4a4a'
 };
 
 export const TYPOGRAPHY = {
@@ -65,12 +67,14 @@ export const TYPOGRAPHY = {
     body1: {
       fontSize: '1rem',
       fontWeight: 400,
-      lineHeight: 1.5
+      lineHeight: 1.5,
+      letterSpacing: '0.75px'
     },
     body2: {
       fontSize: '0.875rem',
       fontWeight: 400,
-      lineHeight: 1.43
+      lineHeight: 1.43,
+      letterSpacing: '0.5px'
     },
     subtitle1: {
       fontSize: '1rem',

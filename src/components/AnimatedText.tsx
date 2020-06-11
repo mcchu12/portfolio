@@ -19,7 +19,7 @@ const parseText = (text: string) => {
   return {
     text,
     numChars: text.length,
-    splitText: text.split(' ').map(word => word.split(''))
+    splitText: text.split(' ').map((word) => word.split('')),
   };
 };
 
@@ -32,7 +32,7 @@ export class AnimatedText extends PureComponent<Props, State> {
     text: '',
     splitText: [],
     numChars: 0,
-    isAnimationComplete: false
+    isAnimationComplete: false,
   };
 
   charsElements: HTMLSpanElement[] = [];
@@ -50,7 +50,8 @@ export class AnimatedText extends PureComponent<Props, State> {
       onComplete: () => {
         this.setState({ ...this.state, isAnimationComplete: true });
         this.props.onTweenCompleted && this.props.onTweenCompleted();
-      }
+        this.tween?.kill();
+      },
     });
 
     if (this.props.shouldPlayed) {
@@ -72,7 +73,7 @@ export class AnimatedText extends PureComponent<Props, State> {
     const { text } = this.state;
 
     const chars = word.map((char, i) => (
-      <span key={text + i} ref={el => el && this.charsElements.push(el)}>
+      <span key={text + i} ref={(el) => el && this.charsElements.push(el)}>
         {char}
       </span>
     ));
@@ -88,7 +89,7 @@ export class AnimatedText extends PureComponent<Props, State> {
     return splitText.map((word, i) => {
       const chars = [
         ...this.renderChars(word),
-        i !== numWords - 1 ? '\u00A0' : null
+        i !== numWords - 1 ? '\u00A0' : null,
       ];
 
       return <span key={text! + i}>{chars}</span>;
@@ -102,7 +103,7 @@ export class AnimatedText extends PureComponent<Props, State> {
         {isAnimationComplete && <div>{this.state.text}</div>}
 
         {!isAnimationComplete && (
-          <div aria-hidden ref={div => (this.containerRef = div)}>
+          <div aria-hidden ref={(div) => (this.containerRef = div)}>
             {this.renderWords()}
           </div>
         )}

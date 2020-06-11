@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useRef, memo } from 'react';
+import React, { FC, useEffect, useRef } from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { Theme } from 'theme';
 import { gsap, Power1 } from 'gsap';
@@ -11,10 +11,16 @@ type Props = {
   title?: string;
   subtitle?: string;
   index?: string;
-  url: string;
+  onClick?: () => void;
 };
 
-const _Card: FC<Props> = ({ thumbnail, title, subtitle, index, url }) => {
+export const Card: FC<Props> = ({
+  thumbnail,
+  title,
+  subtitle,
+  index,
+  onClick,
+}) => {
   const classes = useStyles();
   const [ref, inView, entry] = useInView({ threshold: 0.5, triggerOnce: true });
   const cardRef = useRef<HTMLDivElement>(null);
@@ -33,6 +39,7 @@ const _Card: FC<Props> = ({ thumbnail, title, subtitle, index, url }) => {
         paused: true,
         onComplete: () => {
           gsap.set(cardRef.current, { clearProps: 'all' });
+          tween.current?.kill();
         },
       });
     }
@@ -46,26 +53,16 @@ const _Card: FC<Props> = ({ thumbnail, title, subtitle, index, url }) => {
     };
   }, [inView, entry]);
 
-  const openExternalLink = (url: string) => {
-    window.open(url, '_blank');
-  };
-
   return (
     <div ref={ref} className={classes.root}>
       <div ref={cardRef}>
-        <a href={url} target="_blank" rel="noopener noreferrer">
-          <div className={classes.thumbnail}>
-            <img src={thumbnail} alt={title} />
-          </div>
-        </a>
+        <div className={classes.thumbnail} onClick={onClick}>
+          <img src={thumbnail} alt={title} />
+        </div>
+
         <div className={classes.title}>
           <Typography variant="h6">
-            <span
-              className={classes.pointer}
-              onClick={() => openExternalLink(url)}
-            >
-              {title}
-            </span>
+            <span className={classes.pointer}>{title}</span>
           </Typography>
           <Typography variant="overline">{subtitle}</Typography>
         </div>
@@ -75,8 +72,6 @@ const _Card: FC<Props> = ({ thumbnail, title, subtitle, index, url }) => {
     </div>
   );
 };
-
-export const Card = memo(_Card);
 
 const useStyles = makeStyles(
   (theme: Theme) => ({

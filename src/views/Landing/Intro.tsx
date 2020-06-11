@@ -16,7 +16,10 @@ const connections = [
     platform: 'linkedin',
     url: 'https://www.linkedin.com/in/nguyen-chuong-chu-96b7911a8/',
   },
-  // { platform: 'resume', url: 'https://github.com/mcchu12' },
+  {
+    platform: 'resume',
+    url: 'https://www.dropbox.com/s/l29lhhrugzr6jeq/Resume_NguyenChu.pdf?dl=0',
+  },
 ];
 
 type Props = {
@@ -58,6 +61,7 @@ class _Intro extends React.Component<Props, State> {
       onComplete: () => {
         this.setState({ ...this.state, scrollAnim: true });
         gsap.set(btns, { clearProps: 'all' });
+        this.tween.kill();
       },
     });
   }
@@ -126,9 +130,7 @@ const styles = (theme: Theme) =>
   createStyles({
     root: {
       width: '100%',
-      minHeight: '100vh',
-
-      margin: '0 auto',
+      minHeight: 'calc(100vh - 96px)',
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'center',

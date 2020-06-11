@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import { makeStyles } from '@material-ui/styles';
+import { useHistory } from 'react-router-dom';
 import { Theme } from 'theme';
 
 import { Card, Typography } from '../../components';
@@ -10,33 +11,30 @@ const projects = [
     title: 'Crumbs',
     subtitle: 'HTML / CSS / JS',
     thumbnail: './images/crumbs.jpg',
-    url: 'https://crumbs-3c245.web.app/',
   },
   {
     index: '02',
     title: 'Dogify',
     subtitle: 'Angular2 / Python / Flask',
     thumbnail: './images/dogify.jpg',
-    url: 'https://dogifi.herokuapp.com/',
   },
   {
     index: '03',
     title: 'Leahlou',
     subtitle: 'React / Redux',
     thumbnail: './images/leahlou.jpg',
-    url: 'https://leahlouabellanosa.co/',
   },
   {
     index: '04',
-    title: 'Dollar',
+    title: 'Notes',
     subtitle: 'React / Redux',
-    thumbnail: './images/dollar.jpg',
-    url: 'https://onroll.web.app/',
+    thumbnail: './images/notes.jpg',
   },
 ];
 
 export const Projects: FC = () => {
   const classes = useStyles();
+  const history = useHistory();
 
   return (
     <article>
@@ -44,8 +42,12 @@ export const Projects: FC = () => {
         Projects
       </Typography>
       <div className={classes.grid}>
-        {projects.map((projects) => (
-          <Card key={projects.index} {...projects} />
+        {projects.map((project, index) => (
+          <Card
+            key={project.index}
+            {...project}
+            onClick={() => history.push(`/projects/${index}`)}
+          />
         ))}
       </div>
     </article>
@@ -65,7 +67,7 @@ const useStyles = makeStyles(
         marginTop: theme.spacing(12),
 
         '& > div:nth-child(even)': {
-          marginLeft: 'auto',
+          alignSelf: 'flex-end',
         },
       },
     },

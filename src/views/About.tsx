@@ -52,7 +52,6 @@ const useStyles = makeStyles(
       minHeight: '100vh',
       color: 'white',
       display: 'flex',
-      justifyContent: 'center',
       flexDirection: 'column',
 
       '& section': {

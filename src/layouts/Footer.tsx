@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { Theme } from 'theme';
 
-import { Typography } from '../components';
+import { Typography, IconButton } from '../components';
 
 const socials = [
   {
@@ -44,14 +44,14 @@ export const Footer = () => {
             </Typography>
           </a>
         </div>
-        <div className={classes.social}>
-          {socials.map(({ url, icon, name }, index) => (
-            <a href={url} key={index}>
-              <img src={icon} alt={name} />
-            </a>
+
+        <div>
+          {socials.map((social, index) => (
+            <IconButton {...social} key={index} margin={3} />
           ))}
         </div>
       </section>
+
       <div className={classes.copyright}>All right reserved @MichaelChu</div>
     </footer>
   );
@@ -96,19 +96,6 @@ const useStyles = makeStyles(
         width: 0,
         margin: '2px',
         transition: 'all 0.7s cubic-bezier(0.65, 0, 0.17, 0.98)',
-      },
-    },
-    social: {
-      '& img': {
-        width: '16px',
-        margin: theme.spacing(0, 2),
-        cursor: 'pointer',
-        transition: 'transform 0.3s ease-out',
-      },
-
-      '& img:hover': {
-        transform: 'scale(1.3)',
-        transition: 'transform 0.3s ease-out',
       },
     },
     copyright: {

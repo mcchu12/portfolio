@@ -3,5 +3,5 @@ import * as logActions from '../features/log/actions';
 
 export default {
   router: routerActions,
-  log: logActions
+  log: logActions,
 };
