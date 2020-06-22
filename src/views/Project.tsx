@@ -1,88 +1,49 @@
-import React, { FC } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { FC, useEffect } from 'react';
+import _ from 'lodash';
+import { connect } from 'react-redux';
+import { match, useParams } from 'react-router-dom';
 import { makeStyles } from '@material-ui/styles';
 import { Theme } from 'theme';
 
 import { Typography, IconButton } from '../components';
+import { RootState } from 'typesafe-actions';
+import { fetchProjectAsync } from '../features/projects/actions';
 
-type Project = {
-  name: string;
-  overview: string;
-  role: string;
-  client: string;
-  date: string;
-  stacks: string[];
-  github?: string;
-  demo: string;
-  examples: string[];
+type OwnProps = {
+  match: match<{ id: string }>;
 };
 
-const projects: Project[] = [
-  {
-    name: 'Crumbs',
-    overview: `This is one of my very first project I have created. It is a one page website for a bakery shop. 
-    I used basic HTML/CSS with third parties libraries.`,
-    role: 'frontend',
-    client: 'personal',
-    date: '2018',
-    stacks: ['Vanilla Js', 'Gsap', 'Swiper', 'Firebase'],
-    github: 'https://github.com/mcchu12/crumbs',
-    demo: 'https://crumbs-3c245.web.app/',
-    examples: ['/images/crumbs1.jpg'],
-  },
-  {
-    name: 'Dogify',
-    overview: `I completed a Deep Leaning Nanodegree from Udacity. 
-    I wanted to using this new knowledge to create something
-    that can be used in a real world application. Dogify is the result of this. 
-    Using pretrained model, the application allows users to identify dog breeds with an image.`,
-    role: 'frontend, backend',
-    client: 'personal',
-    date: '2018',
-    stacks: ['Angular2', 'Keras', 'Flask'],
-    github: 'https://github.com/mcchu12/Dogify',
-    demo: 'https://dogifi.herokuapp.com/',
-    examples: ['/images/dogify1.jpg', '/images/dogify-loop.mp4'],
-  },
-  {
-    name: 'Leahlou',
-    overview: `I had a chance to create a website for a friend. 
-    She was recently gradutated in photography and wanted to move away from Wix.
-    I used React for frontend and Firebase for backend. 
-    Since it is a portfolio, I did not expect high traffic. 
-    I chose Firebase because they offer most of the features (database, storage, and hosting) for free.  
-    `,
-    role: 'frontend, backend',
-    client: 'Leahlou',
-    date: '2019',
-    stacks: ['React', 'Pose', 'Firebase'],
-    demo: 'https://leahlouabellanosa.co/',
-    examples: ['/images/leahlou1.jpg'],
-  },
-  {
-    name: 'Notes',
-    overview: `I created this application for Chingu Solo project pior joining their vogage. 
-    Notes is Google Keep clone.`,
-    role: 'frontend, backend',
-    client: 'personal',
-    date: '2020',
-    stacks: ['React', 'Material UI', 'Express', 'Mongoose'],
-    github: 'https://github.com/mcchu12/journal',
-    demo: 'https://chingu-solo-journal.herokuapp.com/',
-    examples: ['/images/notes1.jpg', '/images/note-loop.mp4'],
-  },
-];
+const mapStateToProps = (state: RootState, { match }: OwnProps) => ({
+  project: _.find(
+    state.projects,
+    (project) => project.name === match.params.id
+  ),
+});
 
-export const Project: FC = () => {
+const dispatchProps = {
+  fetchProject: (name: string) => fetchProjectAsync.request(name),
+};
+
+type Props = ReturnType<typeof mapStateToProps> & typeof dispatchProps;
+
+const _Project: FC<Props> = ({ project, fetchProject }) => {
   const classes = useStyles();
-  const { id } = useParams();
-  const project = id && projects[+id];
+
+  const params = useParams<{ id: string }>();
+
+  useEffect(() => {
+    if (!project) {
+      fetchProject(params.id);
+    }
+  }, [fetchProject, params, project]);
 
   return (
     <div className={classes.root}>
       {project && (
         <article>
-          <Typography variant="h5">{project.name}</Typography>
+          <Typography variant="h5" className={classes.capitalize}>
+            {project.name}
+          </Typography>
 
           <div className={classes.grid}>
             <div>
@@ -124,14 +85,13 @@ export const Project: FC = () => {
           </div>
 
           <div className={classes.showcase}>
-            {project.examples.map((example, index) => {
-              const isVideo = example.split('.')[1] === 'mp4';
-              return isVideo ? (
+            {project.examples.map(({ src, type }, index) => {
+              return type === 'video/mp4' ? (
                 <video key={index} autoPlay loop muted>
-                  <source src={example} type="video/mp4" />
+                  <source src={src} type="video/mp4" />
                 </video>
               ) : (
-                <img key={index} src={example} alt={project.name} />
+                <img key={index} src={src} alt={project.name} />
               );
             })}
           </div>
@@ -140,6 +100,8 @@ export const Project: FC = () => {
     </div>
   );
 };
+
+export const Project = connect(mapStateToProps, dispatchProps)(_Project);
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -153,6 +115,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       maxWidth: '500px',
     },
+  },
+  capitalize: {
+    textTransform: 'capitalize',
   },
   detail: {
     margin: theme.spacing(4, 0),

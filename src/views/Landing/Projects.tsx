@@ -1,40 +1,30 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { useHistory } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { Theme } from 'theme';
+import { RootState } from 'typesafe-actions';
 
 import { Card, Typography } from '../../components';
+import { fetchProjectsAsync } from '../../features/projects/actions';
 
-const projects = [
-  {
-    index: '01',
-    title: 'Crumbs',
-    subtitle: 'HTML / CSS / JS',
-    thumbnail: './images/crumbs.jpg',
-  },
-  {
-    index: '02',
-    title: 'Dogify',
-    subtitle: 'Angular2 / Python / Flask',
-    thumbnail: './images/dogify.jpg',
-  },
-  {
-    index: '03',
-    title: 'Leahlou',
-    subtitle: 'React / Redux',
-    thumbnail: './images/leahlou.jpg',
-  },
-  {
-    index: '04',
-    title: 'Notes',
-    subtitle: 'React / Redux',
-    thumbnail: './images/notes.jpg',
-  },
-];
+const mapStateToProps = (state: RootState) => ({
+  projects: state.projects,
+});
 
-export const Projects: FC = () => {
+const dispatchProps = {
+  fetchProjects: () => fetchProjectsAsync.request(),
+};
+
+type Props = ReturnType<typeof mapStateToProps> & typeof dispatchProps;
+
+const _Projects: FC<Props> = ({ fetchProjects, projects }) => {
   const classes = useStyles();
   const history = useHistory();
+
+  useEffect(() => {
+    fetchProjects();
+  }, [fetchProjects]);
 
   return (
     <article>
@@ -42,17 +32,22 @@ export const Projects: FC = () => {
         Projects
       </Typography>
       <div className={classes.grid}>
-        {projects.map((project, index) => (
+        {Object.values(projects).map(({ index, thumbnail, name, stacks }) => (
           <Card
-            key={project.index}
-            {...project}
-            onClick={() => history.push(`/projects/${index}`)}
+            key={index}
+            thumbnail={thumbnail}
+            index={index < 10 ? `0${index}` : index.toString()}
+            title={name}
+            subtitle={stacks}
+            onClick={() => history.push(`/projects/${name}`)}
           />
         ))}
       </div>
     </article>
   );
 };
+
+export const Projects = connect(mapStateToProps, dispatchProps)(_Projects);
 
 const useStyles = makeStyles(
   (theme: Theme) => ({

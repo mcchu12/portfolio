@@ -57,12 +57,14 @@ export const Card: FC<Props> = ({
     <div ref={ref} className={classes.root}>
       <div ref={cardRef}>
         <div className={classes.thumbnail} onClick={onClick}>
-          <img src={thumbnail} alt={title} />
+          <img className={classes.pointer} src={thumbnail} alt={title} />
         </div>
 
         <div className={classes.title}>
           <Typography variant="h6">
-            <span className={classes.pointer}>{title}</span>
+            <span className={classes.pointer} onClick={onClick}>
+              {title}
+            </span>
           </Typography>
           <Typography variant="overline">{subtitle}</Typography>
         </div>
@@ -105,6 +107,7 @@ const useStyles = makeStyles(
     },
     title: {
       margin: theme.spacing(3, 0),
+      textTransform: 'capitalize',
     },
     pointer: {
       cursor: 'pointer',
