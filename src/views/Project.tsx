@@ -71,14 +71,14 @@ const _Project: FC<Props> = ({ project, fetchProject }) => {
               {project.github && (
                 <IconButton
                   url={project.github}
-                  icon="/icons/github.png"
+                  icon="https://firebasestorage.googleapis.com/v0/b/portfolio-e6d75.appspot.com/o/icons%2Fgithub.png?alt=media&token=87b38289-c611-4e36-80c0-26ecde2f641f"
                   name="github"
                   margin={2}
                 />
               )}
               <IconButton
                 url={project.demo}
-                icon="/icons/website.png"
+                icon="https://firebasestorage.googleapis.com/v0/b/portfolio-e6d75.appspot.com/o/icons%2Fwebsite.png?alt=media&token=cf2a5644-f320-43ac-aadd-4019610b06bf"
                 name="website"
               />
             </div>

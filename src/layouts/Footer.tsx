@@ -1,52 +1,47 @@
-import React from 'react';
+import React, { FC } from 'react';
+import _ from 'lodash';
+import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/styles';
 import { Theme } from 'theme';
 
 import { Typography, IconButton } from '../components';
+import { RootState } from 'typesafe-actions';
 
-const socials = [
-  {
-    url: 'mailto:ngcgchu@gmail.com?subject=Inquiry',
-    icon: '/icons/email.png',
-    name: 'email',
-  },
-  {
-    url: 'https://github.com/mcchu12',
-    icon: '/icons/github.png',
-    name: 'github',
-  },
-  {
-    url: 'https://www.linkedin.com/in/nguyen-chuong-chu-96b7911a8/',
-    icon: '/icons/linkedin.png',
-    name: 'linkedin',
-  },
-  {
-    url: 'https://twitter.com/mcchu0',
-    icon: '/icons/twitter.png',
-    name: 'twitter',
-  },
-];
+const mapStateToProps = (state: RootState) => ({
+  socials: _.pick(state.info.social, [
+    'email',
+    'github',
+    'twitter',
+    'linkedin',
+  ]),
+});
 
-export const Footer = () => {
+const dispatchProps = {};
+
+type Props = ReturnType<typeof mapStateToProps> & typeof dispatchProps;
+
+const _Footer: FC<Props> = ({ socials }) => {
   const classes = useStyles();
   return (
     <footer className={classes.root}>
       <section className={classes.contact}>
-        <div>
-          <Typography className={classes.title} variant="overline">
-            Let's work together
-          </Typography>
-          <a href="mailto:ngcgchu@gmail.com?subject=Inquiry">
-            <Typography className={classes.hello} variant="h6">
-              Say
-              <span />
-              hello
+        {socials.email && (
+          <div>
+            <Typography className={classes.title} variant="overline">
+              Let's work together
             </Typography>
-          </a>
-        </div>
+            <a href={socials.email.url}>
+              <Typography className={classes.hello} variant="h6">
+                Say
+                <span />
+                hello
+              </Typography>
+            </a>
+          </div>
+        )}
 
         <div>
-          {socials.map((social, index) => (
+          {Object.values(socials).map((social, index) => (
             <IconButton {...social} key={index} margin={3} />
           ))}
         </div>
@@ -56,6 +51,8 @@ export const Footer = () => {
     </footer>
   );
 };
+
+export const Footer = connect(mapStateToProps, dispatchProps)(_Footer);
 
 const useStyles = makeStyles(
   (theme: Theme) => ({

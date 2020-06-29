@@ -26,6 +26,7 @@ type Props = {
   classes: {
     root: string;
     greeting: string;
+    container: string;
     socialLink: string;
   };
 };
@@ -100,26 +101,34 @@ class _Intro extends React.Component<Props, State> {
     );
   };
 
+  renderSocials = () => {
+    return (
+      <div
+        ref={(el) => (this.buttonContainer = el)}
+        className={this.props.classes.socialLink}
+      >
+        {connections.map(({ platform, url }, index) => (
+          <Button key={index}>
+            <Typography variant="overline">
+              <a href={url} target="_blank" rel="noopener noreferrer">
+                {platform}
+              </a>
+            </Typography>
+          </Button>
+        ))}
+      </div>
+    );
+  };
+
   render() {
     const { classes } = this.props;
     return (
       <article className={classes.root}>
-        {this.renderIntro()}
-
-        <div
-          ref={(el) => (this.buttonContainer = el)}
-          className={classes.socialLink}
-        >
-          {connections.map(({ platform, url }, index) => (
-            <Button key={index}>
-              <Typography variant="overline">
-                <a href={url} target="_blank" rel="noopener noreferrer">
-                  {platform}
-                </a>
-              </Typography>
-            </Button>
-          ))}
+        <div className={classes.container}>
+          {this.renderIntro()}
+          {this.renderSocials()}
         </div>
+
         <ScrollArrow shouldPlayed={this.state.scrollAnim} />
       </article>
     );
@@ -135,6 +144,9 @@ const styles = (theme: Theme) =>
       flexDirection: 'column',
       justifyContent: 'center',
       position: 'relative',
+    },
+    container: {
+      marginBottom: '96px',
     },
     greeting: {
       '& > div': {

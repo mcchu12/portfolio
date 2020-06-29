@@ -1,6 +1,6 @@
 import { combineEpics } from 'redux-observable';
 
-import * as logEpics from '../features/log/epics';
 import * as projectEpics from '../features/projects/epics';
+import * as infoEpics from '../features/info/epics';
 
-export default combineEpics(...Object.values(logEpics), ...Object.values(projectEpics));
+export default combineEpics(...Object.values(projectEpics), ...Object.values(infoEpics));

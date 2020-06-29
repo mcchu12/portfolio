@@ -1,22 +1,28 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
+import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/styles';
 import { Theme } from 'theme';
 import { Typography } from '../components';
+import { RootState } from 'typesafe-actions';
 
-const stacks = [
-  'HTML',
-  'CSS',
-  'Javascript',
-  'Angular2',
-  'React',
-  'Typescript',
-  'NodeJS',
-  'Flutter',
-  'Illustrator',
-];
+import { fetchAboutAsync } from '../features/info/actions';
 
-export const About: FC = () => {
+const mapStateToProps = (state: RootState) => ({
+  about: state.info.about,
+});
+
+const dispatchProps = {
+  fetchAbout: () => fetchAboutAsync.request(),
+};
+
+type Props = ReturnType<typeof mapStateToProps> & typeof dispatchProps;
+
+const _About: FC<Props> = ({ about, fetchAbout }) => {
   const classes = useStyles();
+
+  useEffect(() => {
+    if (!about.intro) fetchAbout();
+  }, [about, fetchAbout]);
 
   return (
     <article className={classes.root}>
@@ -25,19 +31,15 @@ export const About: FC = () => {
           Hello there, nice to meet you!
         </Typography>
 
-        <div className={classes.introduction}>
-          I'm Michael and currently living in Toronto. I taught myself coding. I
-          enjoy learning new things so I can do a bit of everything. My main
-          expertise is front end development (React).
-        </div>
+        <div className={classes.introduction}>{about.intro}</div>
       </section>
 
       <section>
         <Typography className={classes.title}>What I know</Typography>
         <div className={classes.stack}>
-          {stacks.map((stack, index) => (
+          {about.skills.map((skill, index) => (
             <Typography key={index} variant="h6">
-              {stack}
+              {skill}
             </Typography>
           ))}
         </div>
@@ -45,6 +47,8 @@ export const About: FC = () => {
     </article>
   );
 };
+
+export const About = connect(mapStateToProps, dispatchProps)(_About);
 
 const useStyles = makeStyles(
   (theme: Theme) => ({

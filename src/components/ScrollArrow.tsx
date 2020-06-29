@@ -7,9 +7,13 @@ import { Typography } from './Typography';
 
 type Props = {
   shouldPlayed?: boolean;
+  onAnimationComplete?: () => void;
 };
 
-export const ScrollArrow: FC<Props> = ({ shouldPlayed = false }) => {
+export const ScrollArrow: FC<Props> = ({
+  shouldPlayed = false,
+  onAnimationComplete,
+}) => {
   const classes = useStyles();
 
   const shaftRef = useRef<HTMLDivElement>(null);
@@ -45,13 +49,14 @@ export const ScrollArrow: FC<Props> = ({ shouldPlayed = false }) => {
             rotate: '0deg',
             duration: 0.7,
             ease: Power1.easeInOut,
+            onComplete: () => onAnimationComplete && onAnimationComplete(),
           },
           'arrowHeads'
         );
     }
 
     if (shouldPlayed) tl.current.play();
-  }, [shouldPlayed]);
+  }, [shouldPlayed, onAnimationComplete]);
 
   return (
     <div aria-hidden className={classes.root}>
