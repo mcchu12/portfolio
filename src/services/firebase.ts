@@ -2,14 +2,14 @@ import { initializeApp } from 'firebase/app';
 import 'firebase/firestore';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCMlRaT3TjSU-V6YM_VLTrcTxqkPGWDtIs",
-  authDomain: "portfolio-e6d75.firebaseapp.com",
-  databaseURL: "https://portfolio-e6d75.firebaseio.com",
-  projectId: "portfolio-e6d75",
-  storageBucket: "portfolio-e6d75.appspot.com",
-  messagingSenderId: "231133540566",
-  appId: "1:231133540566:web:d6ab69dc932f4c723b5977",
-  measurementId: "G-GBJ9S59TXE"
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  databaseURL: process.env.REACT_APP_DATABASE_URL,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGE_SENDER_ID,
+  appId: process.env.REACT_APP_APP_ID,
+  measurementId: process.env.REACT_APP_MEASUREMENT_ID,
 }
 
 export const fb = initializeApp(firebaseConfig);
